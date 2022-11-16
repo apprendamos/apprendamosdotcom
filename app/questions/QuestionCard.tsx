@@ -37,7 +37,7 @@ function ProfileCard({ name, username }: Profile) {
   );
 }
 
-export default function QuestionCard({ body, author,id }: Question) {
+export default function QuestionCard({ body, author, id }: Question) {
   const converter = new showdown.Converter();
   const html = converter.makeHtml(body);
 
@@ -48,8 +48,12 @@ export default function QuestionCard({ body, author,id }: Question) {
         className="prose prose-slate max-h-60 overflow-hidden"
         dangerouslySetInnerHTML={{ __html: html }}
       />
-      <Link className="invisible group-hover:visible hover:font-bold" href={`/q/${id}`}>Ver más...</Link>
+      <Link
+        className="invisible group-hover:visible hover:font-bold"
+        href={`/questions/${id}`}
+      >
+        Ver más...
+      </Link>
     </div>
   );
 }
-

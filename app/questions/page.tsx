@@ -1,5 +1,5 @@
 import "server-only";
-export const revalidate = 10;
+export const revalidate = 3;
 
 import { xata } from "xata/client";
 import QuestionCard from "./QuestionCard";
