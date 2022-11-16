@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 
 import { xata } from "xata/client";
 import Image from "next/image";
-import Link from "next/link";
 import showdown from "showdown";
 
 async function getQuestion(id: string) {
@@ -42,14 +41,20 @@ function ProfileSection({ name, username, follower_count }: Profile) {
       />
       <div className="ml-2">
         <div className="font-bold -mb-1">{name}</div>
-        <div className="text-sm mb-2 font-medium text-gray-500">@{username}</div>
+        <div className="text-sm mb-2 font-medium text-gray-500">
+          @{username}
+        </div>
         <div className="text-xs text-gray-500">{follower_count} followers</div>
       </div>
     </div>
   );
 }
 
-export default async function QuestionsPage({ params }: { params: { questionId: string } }) {
+export default async function QuestionsPage({
+  params,
+}: {
+  params: { questionId: string };
+}) {
   const question = await getQuestion(params.questionId);
 
   if (!question) {
@@ -74,4 +79,12 @@ export default async function QuestionsPage({ params }: { params: { questionId: 
       />
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const questions = await xata.db.questions.select(["id"]).getAll();
+
+  return questions.map((question) => ({
+    questionId: question.id,
+  }));
 }
