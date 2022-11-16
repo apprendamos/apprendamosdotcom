@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://anthony-cueva-s-workspace-iae285.us-east-1.xata.sh/db/apprendamos",
+  "codegen": {
+    "output": "xata/index.ts"
+  }
+}
