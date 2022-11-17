@@ -1,4 +1,5 @@
 export const revalidate = 3;
+export const dynamicParams = true;
 
 import Image from "next/image";
 
