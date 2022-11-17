@@ -5,5 +5,5 @@ export interface QuestionType {
   body: string;
   creation_date?: string;
   like_count?: number;
-  author: ProfileType;
+  author: ProfileType | null;
 }

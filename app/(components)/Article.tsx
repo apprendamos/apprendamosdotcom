@@ -13,8 +13,6 @@ export default function Article({
   const converter = new showdown.Converter();
   const html = converter.makeHtml(children);
 
-  console.log(html);
-
   return (
     <article
       className={`prose prose-zinc overflow-hidden dark:prose-invert ${className}`}
