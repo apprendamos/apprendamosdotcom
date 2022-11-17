@@ -1,4 +1,3 @@
-import "server-only";
 
 import { Article } from "app/(components)";
 import Link from "next/link";

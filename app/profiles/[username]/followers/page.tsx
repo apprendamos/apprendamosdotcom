@@ -1,5 +1,4 @@
-export const revalidate = 3;
-export const dynamicParams = true;
+export const revalidate = 10;
 
 import { xata } from "xata/client";
 
@@ -18,8 +17,8 @@ async function getFollowers(username: string) {
     });
 
   const profiles = page.records.map(
-    (record) => record.follower
-  ) as ProfileType[];
+    (record) => record.follower as ProfileType
+  );
   return profiles;
 }
 

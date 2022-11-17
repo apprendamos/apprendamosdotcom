@@ -1,6 +1,6 @@
-export const revalidate = 3;
-import Image from "next/image";
+export const revalidate = 10;
 
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { xata } from "xata/client";
 
@@ -8,8 +8,8 @@ import { randomIntFromInterval } from "utils";
 import ProfileNavbar from "./ProfileNavbar";
 
 async function getProfile(username: string) {
-  const records = await xata.db.profiles.filter("username", username).getAll();
-  return records[0];
+  const record = await xata.db.profiles.filter("username", username).getFirst();
+  return record;
 }
 
 export default async function SingleProfileLayout({
@@ -20,6 +20,10 @@ export default async function SingleProfileLayout({
   children: React.ReactNode;
 }) {
   const profile = await getProfile(params.username);
+
+  if (!profile) {
+    return notFound();
+  }
 
   const rndInt = randomIntFromInterval(1, 50);
 
@@ -38,12 +42,4 @@ export default async function SingleProfileLayout({
       {children}
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  const profiles = await xata.db.profiles.select(["username"]).getAll();
-
-  return profiles.map((profile) => ({
-    username: profile.username,
-  }));
 }
