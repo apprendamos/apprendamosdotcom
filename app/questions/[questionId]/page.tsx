@@ -1,5 +1,4 @@
 export const revalidate = 3;
-export const dynamicParams = true;
 
 import { Profile } from "app/(components)";
 
@@ -51,19 +50,18 @@ export default async function SingleQuestionPage({
 
   const author = await getProfile(question.author?.id as string);
 
-  const profile = author || {
+  const profile = (author || {
     name: "Unknown",
     username: "not_found",
-    follower_count: 0,
-  };
+  }) as ProfileType;
 
   const comments = await getComments(params.questionId);
   return (
     <div>
-      <Profile {...(profile as ProfileType)} />
+      <Profile {...profile} />
       <Article>{question.body}</Article>
 
-      {comments && comments.length > 0 ? (
+      {comments ? (
         <>
           <h1 className="font-bold">Comentarios</h1>
           <div className="space-y-4">

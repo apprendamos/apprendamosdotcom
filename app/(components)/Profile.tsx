@@ -1,3 +1,5 @@
+import "server-only";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ProfileType } from "types";
