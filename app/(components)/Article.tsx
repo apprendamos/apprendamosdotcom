@@ -1,6 +1,8 @@
 import React from "react";
 import showdown from "showdown";
 
+showdown.setOption('tables', true);
+
 export default function Article({
   children,
   className,
@@ -10,6 +12,8 @@ export default function Article({
 }) {
   const converter = new showdown.Converter();
   const html = converter.makeHtml(children);
+
+  console.log(html);
 
   return (
     <article
