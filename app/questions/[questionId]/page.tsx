@@ -31,6 +31,10 @@ async function getComments(id: string) {
       },
     });
 
+  if (page?.records?.length > 0) {
+    return null;
+  }
+
   return page.records as CommentType[];
 }
 
@@ -59,7 +63,7 @@ export default async function SingleQuestionPage({
       <Profile {...(profile as ProfileType)} />
       <Article>{question.body}</Article>
 
-      {comments && comments.length > 0 && (
+      {comments && comments.length > 0 ? (
         <>
           <h1 className="font-bold">Comentarios</h1>
           <div className="space-y-4">
@@ -68,6 +72,8 @@ export default async function SingleQuestionPage({
             ))}
           </div>
         </>
+      ) : (
+        <p className="text-gray-500">Aún no hay comentarios</p>
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-export const revalidate = 3;
+export const dynamic = 'force-dynamic'
 
 import { xata } from "xata/client";
 import Question from "./Question";

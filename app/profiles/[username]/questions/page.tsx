@@ -1,5 +1,5 @@
-
 export const revalidate = 3;
+export const dynamicParams = true;
 
 import { xata } from "xata/client";
 
