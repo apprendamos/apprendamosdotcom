@@ -1,6 +1,4 @@
 export const revalidate = 3;
-export const dynamicParams = true;
-
 import Image from "next/image";
 
 import { notFound } from "next/navigation";
@@ -22,10 +20,6 @@ export default async function SingleProfileLayout({
   children: React.ReactNode;
 }) {
   const profile = await getProfile(params.username);
-
-  if (!profile) {
-    return notFound();
-  }
 
   const rndInt = randomIntFromInterval(1, 50);
 

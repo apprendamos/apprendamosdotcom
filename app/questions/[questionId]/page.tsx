@@ -44,11 +44,7 @@ export default async function SingleQuestionPage({
 }) {
   const question = await getQuestion(params.questionId);
 
-  if (!question) {
-    return notFound();
-  }
-
-  const author = await getProfile(question.author?.id as string);
+  const author = await getProfile(question?.author?.id as string);
 
   const profile = (author || {
     name: "Unknown",
@@ -59,7 +55,7 @@ export default async function SingleQuestionPage({
   return (
     <div>
       <Profile {...profile} />
-      <Article>{question.body}</Article>
+      <Article>{question?.body as string}</Article>
 
       {comments ? (
         <>
