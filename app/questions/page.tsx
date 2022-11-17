@@ -2,7 +2,9 @@ import "server-only";
 export const revalidate = 3;
 
 import { xata } from "xata/client";
-import QuestionCard from "./QuestionCard";
+import Question from "./Question";
+
+import { QuestionType } from "./../../types/QuestionType";
 
 async function getQuestions() {
   const page = await xata.db.questions
@@ -20,7 +22,7 @@ async function getQuestions() {
       },
     });
 
-  return page.records;
+  return page.records as QuestionType[];
 }
 
 export default async function QuestionsPage() {
@@ -29,15 +31,7 @@ export default async function QuestionsPage() {
   return (
     <div className="space-y-4">
       {questions.map((question) => (
-        <QuestionCard
-          key={question.id}
-          id={question.id}
-          body={question.body}
-          author={{
-            name: question.author?.name || "Unknown",
-            username: question.author?.username || "not_found",
-          }}
-        />
+        <Question key={question.id} {...question} />
       ))}
     </div>
   );
