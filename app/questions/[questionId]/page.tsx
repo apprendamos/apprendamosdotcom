@@ -1,4 +1,4 @@
-import "server-only";
+
 export const revalidate = 3;
 
 import { Profile } from "app/(components)";

@@ -1,34 +1,16 @@
-import "server-only";
 export const revalidate = 3;
-
-import { Question } from "app/(components)";
 
 import Image from "next/image";
 
 import { notFound } from "next/navigation";
-import { ProfileType, QuestionType } from "types";
 import { xata } from "xata/client";
 
 import { randomIntFromInterval } from "utils";
-import ProfileNavbar from './ProfileNavbar';
+import ProfileNavbar from "./ProfileNavbar";
 
 async function getProfile(username: string) {
   const records = await xata.db.profiles.filter("username", username).getAll();
   return records[0];
-}
-
-async function getQuestions(profileId: string) {
-  const page = await xata.db.questions
-    .filter("author.id", profileId)
-    .sort("publication_date", "desc")
-    .select(["*"])
-    .getPaginated({
-      pagination: {
-        size: 15,
-      },
-    });
-
-  return page.records as QuestionType[];
 }
 
 export default async function SingleProfileLayout({
@@ -44,7 +26,6 @@ export default async function SingleProfileLayout({
     return notFound();
   }
 
-  const questions = await getQuestions(profile?.id as string)
   const rndInt = randomIntFromInterval(1, 50);
 
   return (

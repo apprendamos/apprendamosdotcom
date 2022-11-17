@@ -1,4 +1,3 @@
-import "server-only";
 export const revalidate = 3;
 
 import { xata } from "xata/client";
