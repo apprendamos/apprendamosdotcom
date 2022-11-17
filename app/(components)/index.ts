@@ -1,3 +1,4 @@
-import Article from "./Article"
+import Article from "./Article";
+import Profile from "./Profile";
 
-export { Article }
+export { Article, Profile };

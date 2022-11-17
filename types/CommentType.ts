@@ -1,6 +1,6 @@
 import { ProfileType } from "./ProfileType";
 
-export interface QuestionType {
+export interface CommentType {
   id: string;
   body: string;
   creation_date?: string;

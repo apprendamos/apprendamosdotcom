@@ -1,14 +1,10 @@
 import { Article } from "app/(components)";
 import Link from "next/link";
-import showdown from "showdown";
-import { QuestionType,ProfileType } from "types";
+import { QuestionType, ProfileType } from "types";
 
-import Profile from "./Profile";
+import { Profile } from "app/(components)";
 
 export default function Question({ body, author, id }: QuestionType) {
-  const converter = new showdown.Converter();
-  const html = converter.makeHtml(body);
-
   const profile = author || {
     name: "Unknown",
     username: "not_found",
@@ -24,7 +20,7 @@ export default function Question({ body, author, id }: QuestionType) {
         hover:bg-zinc-200 dark:hover:bg-zinc-700
       "
     >
-      <Profile {...profile as ProfileType}/>
+      <Profile {...(profile as ProfileType)} />
       <Article className="max-h-60">{body}</Article>
       <Link
         className="invisible group-hover:visible hover:font-bold"

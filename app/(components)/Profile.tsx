@@ -2,7 +2,11 @@ import Image from "next/image";
 import { ProfileType } from "types";
 import { randomIntFromInterval } from "utils";
 
-export default function Profile({ name, username, follower_count }: ProfileType) {
+export default function Profile({
+  name,
+  username,
+  follower_count,
+}: ProfileType) {
   const rndInt = randomIntFromInterval(1, 50);
 
   return (
@@ -19,7 +23,11 @@ export default function Profile({ name, username, follower_count }: ProfileType)
         <div className="text-sm mb-2 font-medium text-gray-500">
           @{username}
         </div>
-        <div className="text-xs text-gray-500">{follower_count} followers</div>
+        {follower_count && follower_count > 0 && (
+          <div className="text-xs text-gray-500">
+            {follower_count} followers
+          </div>
+        )}
       </div>
     </div>
   );

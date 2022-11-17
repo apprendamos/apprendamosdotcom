@@ -1,11 +1,14 @@
 import "server-only";
-import Profile from "./Profile";
 export const revalidate = 3;
 
+import { Profile } from "app/(components)";
+
 import { notFound } from "next/navigation";
-import {ProfileType} from "types";
+import { ProfileType, CommentType } from "types";
 import { xata } from "xata/client";
 import { Article } from "app/(components)";
+
+import Comment from "./Comment";
 
 async function getQuestion(id: string) {
   const record = await xata.db.questions.read(id);
@@ -15,6 +18,20 @@ async function getQuestion(id: string) {
 async function getProfile(id: string) {
   const record = await xata.db.profiles.read(id);
   return record;
+}
+
+async function getComments(id: string) {
+  const page = await xata.db.comments
+    .filter("question.id", id)
+    .sort("publication_date", "desc")
+    .select(["*", "author.username", "author.name"])
+    .getPaginated({
+      pagination: {
+        size: 15,
+      },
+    });
+
+  return page.records as CommentType[];
 }
 
 export default async function SingleQuestionPage({
@@ -36,10 +53,22 @@ export default async function SingleQuestionPage({
     follower_count: 0,
   };
 
+  const comments = await getComments(params.questionId);
   return (
     <div>
-      <Profile {...profile as ProfileType} />
+      <Profile {...(profile as ProfileType)} />
       <Article>{question.body}</Article>
+
+      {comments && comments.length > 0 && (
+        <>
+          <h1 className="font-bold">Comentarios</h1>
+          <div className="space-y-4">
+            {comments.map((comment) => (
+              <Comment key={comment.id} {...comment} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

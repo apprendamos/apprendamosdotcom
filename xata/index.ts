@@ -91,6 +91,7 @@ const tables = [
         defaultValue: "2022-11-17T00:00:00Z",
       },
       { name: "author", type: "link", link: { table: "profiles" } },
+      { name: "question", type: "link", link: { table: "questions" } },
     ],
   },
 ] as const;

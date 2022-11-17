@@ -4,7 +4,7 @@ export const revalidate = 3;
 import { xata } from "xata/client";
 import Question from "./Question";
 
-import { QuestionType } from "./../../types/QuestionType";
+import { QuestionType } from "types/QuestionType";
 
 async function getQuestions() {
   const page = await xata.db.questions

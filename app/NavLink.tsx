@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSelectedLayoutSegments } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function NavLink({
   href,
@@ -10,8 +10,8 @@ export default function NavLink({
   href: string;
   children: React.ReactNode;
 }) {
-  const segments = useSelectedLayoutSegments();
-  const isActive = segments.includes(href.replace(/^\//, ""));
+  const pathname = usePathname();
+  const isActive = pathname === href;
 
   return (
     <Link href={href} className={isActive ? "text-blue-500" : "text-gray-500"}>
