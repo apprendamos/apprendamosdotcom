@@ -49,11 +49,11 @@ const tables = [
     ],
   },
   {
-    name: "user_question_rels",
+    name: "profile_question_rels",
     columns: [
-      { name: "user", type: "link", link: { table: "profiles" } },
       { name: "question", type: "link", link: { table: "questions" } },
       { name: "like_status", type: "bool", defaultValue: "false" },
+      { name: "profile", type: "link", link: { table: "profiles" } },
     ],
   },
   {
@@ -94,6 +94,19 @@ const tables = [
       { name: "question", type: "link", link: { table: "questions" } },
     ],
   },
+  {
+    name: "follower_followee_rel",
+    columns: [
+      { name: "follower", type: "link", link: { table: "profiles" } },
+      { name: "followee", type: "link", link: { table: "profiles" } },
+      {
+        name: "creation_date",
+        type: "datetime",
+        notNull: true,
+        defaultValue: "2022-12-20T01:11:01.001Z",
+      },
+    ],
+  },
 ] as const;
 
 export type SchemaTables = typeof tables;
@@ -105,8 +118,8 @@ export type ProfilesRecord = Profiles & XataRecord;
 export type Questions = InferredTypes["questions"];
 export type QuestionsRecord = Questions & XataRecord;
 
-export type UserQuestionRels = InferredTypes["user_question_rels"];
-export type UserQuestionRelsRecord = UserQuestionRels & XataRecord;
+export type ProfileQuestionRels = InferredTypes["profile_question_rels"];
+export type ProfileQuestionRelsRecord = ProfileQuestionRels & XataRecord;
 
 export type Accounts = InferredTypes["accounts"];
 export type AccountsRecord = Accounts & XataRecord;
@@ -120,14 +133,18 @@ export type PhoneConnectionsRecord = PhoneConnections & XataRecord;
 export type Comments = InferredTypes["comments"];
 export type CommentsRecord = Comments & XataRecord;
 
+export type FollowerFolloweeRel = InferredTypes["follower_followee_rel"];
+export type FollowerFolloweeRelRecord = FollowerFolloweeRel & XataRecord;
+
 export type DatabaseSchema = {
   profiles: ProfilesRecord;
   questions: QuestionsRecord;
-  user_question_rels: UserQuestionRelsRecord;
+  profile_question_rels: ProfileQuestionRelsRecord;
   accounts: AccountsRecord;
   mail_connections: MailConnectionsRecord;
   phone_connections: PhoneConnectionsRecord;
   comments: CommentsRecord;
+  follower_followee_rel: FollowerFolloweeRelRecord;
 };
 
 const DatabaseClient = buildClient();
