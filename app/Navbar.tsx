@@ -1,3 +1,4 @@
+import LoginButton from "./LoginButton";
 import NavLink from "./NavLink";
 
 export default function Navbar() {
@@ -6,6 +7,7 @@ export default function Navbar() {
       <NavLink href="/">Home</NavLink>
       <NavLink href="/questions">Questions</NavLink>
       <NavLink href="/about">About</NavLink>
+      <LoginButton />
     </nav>
   );
 }

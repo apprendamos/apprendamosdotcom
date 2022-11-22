@@ -15,7 +15,7 @@ export default function Article({
 
   return (
     <article
-      className={`prose prose-zinc overflow-hidden dark:prose-invert ${className}`}
+      className={`prose prose-zinc overflow-hidden dark:prose-invert ${className}`} 
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

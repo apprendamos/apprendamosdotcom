@@ -10,8 +10,8 @@ export default function ProfileNavbar({ username }: { username: string }) {
       <ProfileNavLink href={`/profiles/${username}/followers`}>
         Followers
       </ProfileNavLink>
-      <ProfileNavLink href={`/profiles/${username}/following`}>
-        Following
+      <ProfileNavLink href={`/profiles/${username}/followees`}>
+        Followees
       </ProfileNavLink>
     </div>
   );

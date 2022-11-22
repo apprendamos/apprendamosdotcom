@@ -6,7 +6,7 @@ import { ProfileType } from "types";
 import { Profile } from "app/(components)";
 
 async function getFollowees(username: string) {
-  const page = await xata.db.follower_followee_rel
+  const page = await xata.db.follower_followee_rels
     .filter("follower.username", username)
     .sort("creation_date", "desc")
     .select(["followee.*", "creation_date"])
