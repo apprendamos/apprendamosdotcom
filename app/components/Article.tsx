@@ -1,6 +1,4 @@
-import React from "react";
 import showdown from "showdown";
-
 showdown.setOption("tables", true);
 
 export default function Article({

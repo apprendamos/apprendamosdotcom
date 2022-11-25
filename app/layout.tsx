@@ -1,7 +1,7 @@
 "use client";
 import { SessionProvider } from "next-auth/react";
 
-import { AnalyticsWrapper } from "./(components)/analytics";
+import { AnalyticsWrapper } from "./components/analytics";
 
 import "./globals.css";
 import Navbar from "./Navbar";
@@ -17,7 +17,7 @@ export default function RootLayout({
         <SessionProvider refetchOnWindowFocus={false}>
           <>
             <Navbar />
-            <main className="px-4">{children}</main>
+            <main className="px-4 pb-4">{children}</main>
             <AnalyticsWrapper />
           </>
         </SessionProvider>

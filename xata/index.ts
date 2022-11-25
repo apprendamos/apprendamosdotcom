@@ -26,6 +26,7 @@ const tables = [
         notNull: true,
         defaultValue: "0",
       },
+      { name: "image", type: "string" },
     ],
   },
   {
@@ -124,8 +125,6 @@ const tables = [
       },
       { name: "blocked_status", type: "bool", defaultValue: "false" },
       { name: "emailVerified", type: "datetime" },
-      { name: "image", type: "string" },
-      { name: "name", type: "string" },
     ],
   },
   {

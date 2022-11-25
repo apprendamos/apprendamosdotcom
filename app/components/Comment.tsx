@@ -1,5 +1,5 @@
 import { CommentType, ProfileType } from "types";
-import { Profile } from "app/(components)";
+import { Profile } from "app/components";
 
 export default function Comment({ id, body, like_count, author }: CommentType) {
   const profile = author || {

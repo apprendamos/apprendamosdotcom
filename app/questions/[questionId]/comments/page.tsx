@@ -2,7 +2,7 @@ export const revalidate = 10;
 
 import { CommentType } from "types";
 import { xata } from "xata/client";
-import { Comment } from "app/(components)";
+import { Comment } from "app/components";
 
 async function getComments(id: string) {
   const page = await xata.db.comments

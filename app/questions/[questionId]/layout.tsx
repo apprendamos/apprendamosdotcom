@@ -3,7 +3,7 @@ export const revalidate = 10;
 import { notFound } from "next/navigation";
 import { ProfileType } from "types";
 import { xata } from "xata/client";
-import { Article, Profile } from "app/(components)";
+import { Article, Profile } from "app/components";
 import QuestionNavbar from "./QuestionNavbar";
 
 async function getQuestion(id: string) {

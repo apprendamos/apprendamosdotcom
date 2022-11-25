@@ -1,5 +1,5 @@
 import { QuestionType } from "./QuestionType";
 import { ProfileType } from "./ProfileType";
 import { CommentType } from "./CommentType";
-
-export type { QuestionType, ProfileType, CommentType };
+import { AuthUserType } from "./AuthUserType";
+export type { QuestionType, ProfileType, CommentType, AuthUserType };

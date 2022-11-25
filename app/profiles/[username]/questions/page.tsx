@@ -3,7 +3,7 @@ export const revalidate = 10;
 import { xata } from "xata/client";
 
 import { ProfileType, QuestionType } from "types";
-import { Question } from "app/(components)";
+import { Question } from "app/components";
 
 async function getProfile(username: string) {
   const records = await xata.db.profiles.filter("username", username).getAll();

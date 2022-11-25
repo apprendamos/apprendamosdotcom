@@ -1,8 +1,8 @@
-import { Article } from "app/(components)";
+import { Article } from "app/components";
 import Link from "next/link";
 import { QuestionType, ProfileType } from "types";
 
-import { Profile } from "app/(components)";
+import { Profile } from "app/components";
 
 export default function Question({ body, author, id }: QuestionType) {
   const profile = author || {

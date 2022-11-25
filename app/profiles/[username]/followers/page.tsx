@@ -3,7 +3,7 @@ export const revalidate = 10;
 import { xata } from "xata/client";
 
 import { ProfileType } from "types";
-import { Profile } from "app/(components)";
+import { Profile } from "app/components";
 
 async function getFollowers(username: string) {
   const page = await xata.db.follower_followee_rels

@@ -48,7 +48,7 @@ export function XataAdapter(): Adapter {
       const accounts = await xata.db.accounts
         .filter("providerAccountId", providerAccountId)
         .filter("provider", provider)
-        .select(["*", "user.*"])
+        .select(["*", "user.*", "user.profile.*"])
         .getAll();
 
       if (!accounts || !accounts[0] || !accounts[0].user) return;
@@ -93,8 +93,14 @@ export function XataAdapter(): Adapter {
       return {
         session,
         user: {
-          ...user,
-          name: user?.profile?.name,
+          id: user?.id,
+          email: user?.email,
+          profile: {
+            id: user?.profile?.id,
+            name: user?.profile?.name,
+            image: user?.profile?.image,
+            username: user?.profile?.username,
+          },
         },
       };
     },
