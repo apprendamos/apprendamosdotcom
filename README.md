@@ -5,3 +5,4 @@ This is the repository of the first product of Apprendamos Inc: our web applicat
 Happy hacking!
 
 check the app ;)
+ this is now the main page
