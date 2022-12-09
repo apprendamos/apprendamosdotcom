@@ -40,7 +40,9 @@ export default function CreatePage() {
       </h1>
       <h1 className="font-black text-lg">Raw text</h1>
       <textarea
-        className="w-full h-96 border border-zinc-600 p-2 rounded-md"
+        className="
+        bg-zinc-800
+        w-full h-96 border border-zinc-600 p-2 rounded-md"
         value={body}
         onChange={(e) => setBody(e.target.value)}
       />

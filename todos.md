@@ -1,0 +1,3 @@
+- Like button
+- Follow button
+- Creation date of the question

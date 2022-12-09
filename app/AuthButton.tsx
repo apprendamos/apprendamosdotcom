@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useSession, signOut, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 import {
   GearIcon,
@@ -16,22 +17,24 @@ import * as Popover from "@radix-ui/react-popover";
 import { AuthUserType } from "types";
 
 export default function AuthButton() {
+  const router = useRouter();
   const { data: session, status } = useSession();
 
   if (status === "loading") {
     return (
-      <Image
-        src={"https://xsgames.co/randomusers/assets/avatars/pixel/1.jpg"}
-        className="rounded-full border"
-        alt="User Avatar"
-        width={36}
-        height={36}
-      />
+      <div className="animate-pulse w-9 h-9 rounded-full bg-zinc-500 border border-gray-500" />
     );
   }
 
   if (session && session.user) {
-    const profile = (session.user as AuthUserType).profile;
+    const user = session.user as AuthUserType;
+    const profile = user.profile;
+    
+    if (!profile?.username) {
+      router.push("/auth/welcome");
+    }
+
+
     return (
       <>
         <Popover.Root>
