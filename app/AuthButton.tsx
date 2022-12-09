@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import {
   GearIcon,
@@ -18,6 +19,7 @@ import { AuthUserType } from "types";
 
 export default function AuthButton() {
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session, status } = useSession();
 
   if (status === "loading") {
@@ -29,11 +31,14 @@ export default function AuthButton() {
   if (session && session.user) {
     const user = session.user as AuthUserType;
     const profile = user.profile;
-    
-    if (!profile?.username) {
+
+    if (!profile?.username && pathname !== "/auth/welcome") {
       router.push("/auth/welcome");
     }
 
+    if (profile?.username && pathname === "/auth/welcome") {
+      router.push("/");
+    }
 
     return (
       <>
