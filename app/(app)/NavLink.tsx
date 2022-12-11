@@ -14,7 +14,13 @@ export default function NavLink({
   const isActive = pathname === href;
 
   return (
-    <Link href={href} className={isActive ? "text-blue-500" : "text-gray-500"}>
+    <Link
+      href={href}
+      className={
+        "flex items-center justify-center " +
+        (isActive ? "text-blue-500" : "text-gray-500")
+      }
+    >
       {children}
     </Link>
   );

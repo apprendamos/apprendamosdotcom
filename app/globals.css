@@ -5,3 +5,11 @@
 :root {
   color-scheme: dark;
 }
+
+main {
+  @apply p-2 max-h-[90vh] overflow-y-scroll grow;
+}
+
+[data-nextjs-scroll-focus-boundary] {
+  @apply h-full flex flex-col;
+}

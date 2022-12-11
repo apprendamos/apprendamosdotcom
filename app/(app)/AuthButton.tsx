@@ -32,11 +32,11 @@ export default function AuthButton() {
     const user = session.user as AuthUserType;
     const profile = user.profile;
 
-    if (!profile?.username && pathname !== "/auth/welcome") {
-      router.push("/auth/welcome");
+    if (!profile?.username && pathname !== "/welcome") {
+      router.push("/welcome");
     }
 
-    if (profile?.username && pathname === "/auth/welcome") {
+    if (profile?.username && pathname === "/welcome") {
       router.push("/");
     }
 
@@ -59,13 +59,13 @@ export default function AuthButton() {
           </Popover.Trigger>
           <Popover.Portal>
             <Popover.Content
-              className="bg-zinc-600 rounded-md p-2"
+              className="bg-zinc-600 rounded p-2"
               sideOffset={5}
             >
               <div className="flex flex-col gap-2">
                 <Link
                   href={`/profiles/${profile?.username}`}
-                  className="flex items-center space-x-2 hover:bg-zinc-500 rounded-md p-1"
+                  className="flex items-center space-x-2 hover:bg-zinc-500 rounded p-1"
                 >
                   <Image
                     src={
@@ -82,7 +82,7 @@ export default function AuthButton() {
 
                 <Link
                   href="/create"
-                  className="flex items-center space-x-2 hover:bg-zinc-500 rounded-md p-1"
+                  className="flex items-center space-x-2 hover:bg-zinc-500 rounded p-1"
                 >
                   <Pencil2Icon className="w-5 h-5" />
                   <h1 className="font-medium">Create</h1>
@@ -90,14 +90,14 @@ export default function AuthButton() {
 
                 <Link
                   href="/settings"
-                  className="flex items-center space-x-2 hover:bg-zinc-500 rounded-md p-1"
+                  className="flex items-center space-x-2 hover:bg-zinc-500 rounded p-1"
                 >
                   <GearIcon className="w-5 h-5" />
                   <h1 className="font-medium">Settings</h1>
                 </Link>
                 <button
                   onClick={() => signOut()}
-                  className="group flex items-center space-x-2 hover:bg-red-500 rounded-md p-1"
+                  className="group flex items-center space-x-2 hover:bg-red-500 rounded p-1"
                 >
                   <ExitIcon className="w-5 h-5 group-hover:text-white" />
                   <h1 className="font-medium group-hover:text-white">
@@ -116,7 +116,7 @@ export default function AuthButton() {
     <button
       type="button"
       onClick={() => signIn()}
-      className="group flex items-center space-x-2 hover:bg-red-500 rounded-md p-1"
+      className="group flex items-center space-x-2 hover:bg-red-500 rounded p-1"
     >
       <EnterIcon className="w-5 h-5 group-hover:text-white" />
       <h1 className="font-medium group-hover:text-white">Sign In</h1>

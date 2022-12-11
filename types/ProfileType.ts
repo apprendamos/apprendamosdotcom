@@ -4,4 +4,5 @@ export interface ProfileType {
   username: string;
   follower_count?: number;
   creation_date?: string;
+  bio?: string;
 }

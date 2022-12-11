@@ -24,9 +24,9 @@ export const authOptions = {
   ],
   adapter: XataAdapter(),
   pages: {
-    signIn: "/auth/signin",
-    newUser: "/auth/welcome",
-    error: "/auth/error",
+    signIn: "/signin",
+    newUser: "/welcome",
+    error: "/error",
   },
   callbacks: {
     async session({
@@ -42,7 +42,7 @@ export const authOptions = {
     async signIn({ user, account, profile, email, credentials }: any) {
       console.log("user", user);
       if (user.blocked_status) {
-        return "/auth/blocked";
+        return "/blocked";
       }
       return true;
     },
