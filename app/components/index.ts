@@ -1,3 +1,5 @@
+import AnalyticsWrapper  from "./AnalyticsWrapper";
+
 import Article from "./Article";
 import Profile from "./Profile";
 import Question from "./Question";
@@ -15,8 +17,10 @@ import AppBottomBar from "./AppBottomBar";
 import QuestionCard from "./QuestionCard";
 import ProfileCard from "./ProfileCard";
 
+import PageBackButton from "./PageBackButton";
 
 export {
+  AnalyticsWrapper,
   NavLink,
   Article,
   Profile,
@@ -29,5 +33,7 @@ export {
   BaseTopBar,
   BaseBottomBar,
 
-  AppBottomBar
+  AppBottomBar,
+
+  PageBackButton,
 };

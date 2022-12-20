@@ -1,11 +1,9 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { BaseTopBar } from "app/components";
+import { BaseTopBar, PageBackButton } from "app/components";
 import {
-  ArrowLeftIcon,
   CrossCircledIcon,
-  CheckCircledIcon,
 } from "@radix-ui/react-icons";
 
 import { useRouter, useSearchParams } from "next/navigation";
@@ -37,10 +35,7 @@ export default function Navbar() {
 
   return (
     <BaseTopBar>
-      <ArrowLeftIcon
-        onClick={() => router.back()}
-        className="w-4 h-4 text-zinc-600 focus:text-zinc-500"
-      />
+      <PageBackButton />
       <input
         value={searchString}
         type="text"

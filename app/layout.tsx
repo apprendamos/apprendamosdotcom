@@ -1,7 +1,9 @@
 "use client";
+
 import { SessionProvider } from "next-auth/react";
 import { SWRConfig } from "swr";
-import { AnalyticsWrapper } from "./components/analytics";
+
+import { AnalyticsWrapper } from "app/components";
 
 import "./globals.css";
 
@@ -16,7 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html
-      className={"bg-zinc-100 dark:bg-zinc-900 h-screen flex flex-col " + inter.className}
+      className={
+        "bg-zinc-100 dark:bg-zinc-900 h-screen flex flex-col " + inter.className
+      }
       lang="en"
     >
       <SWRConfig
@@ -26,7 +30,7 @@ export default function RootLayout({
             fetch(resource, init).then((res) => res.json()),
         }}
       >
-        <SessionProvider refetchOnWindowFocus={false}>
+        <SessionProvider>
           <body className="bg-zinc-200 dark:bg-zinc-800 mx-auto my-auto h-screen w-screen sm:h-160 sm:w-96 sm:rounded-lg">
             {children}
             <AnalyticsWrapper />

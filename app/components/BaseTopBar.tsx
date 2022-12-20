@@ -6,16 +6,18 @@ export default function BaseTopBar({
   className?: string;
 }) {
   return (
-    <nav
+    <header
       className={`
+        sm:rounded-t-lg
         sticky top-0
-        flex items-center justify-between 
+        flex items-center justify-between flex-none
         h-[2.5rem] px-4
         border-b border-zinc-700
+        bg-zinc-800
         ${className}
       `}
     >
       {children}
-    </nav>
+    </header>
   );
 }

@@ -7,7 +7,7 @@
 }
 
 main {
-  @apply p-2 max-h-[90vh] overflow-y-scroll grow;
+  @apply p-2 overflow-y-scroll grow;
 }
 
 [data-nextjs-scroll-focus-boundary] {
