@@ -17,6 +17,7 @@
     "@types/react-dom": "latest",
     "@vercel/analytics": "latest",
     "@xata.io/client": "latest",
+    "dayjs": "^1.11.7",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "next": "latest",

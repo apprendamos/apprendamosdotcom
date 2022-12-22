@@ -3,7 +3,7 @@
 - [ ] Like button
 - [ ] Follow button
 - [ ] Creation date of the question
-- [ ] Pagination
+- [x] Pagination
 - [x] Search
 - [ ] Select profile picture (or upload)
 - [x] Generic navbar

@@ -1,5 +1,7 @@
 import randomIntFromInterval from "./randomIntFromInterval";
+import { formatRelativeTime } from "./dayjs";
 
 export {
-  randomIntFromInterval
+  randomIntFromInterval,
+  formatRelativeTime,
 }
