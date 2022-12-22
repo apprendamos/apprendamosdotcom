@@ -15,8 +15,9 @@ export default function QuestionCardMedium({ body, author, id }: QuestionType) {
       className="
         group select-none 
         px-3 py-2
-        rounded border dark:border-zinc-700
-        bg-zinc-100 dark:bg-zinc-800
+        rounded border border-transparent 
+        dark:focus-within:border-zinc-800
+        bg-zinc-100 dark:bg-zinc-900
       "
     >
       <Profile {...(profile as ProfileType)} />

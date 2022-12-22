@@ -15,7 +15,7 @@ export default function Question({ body, author, id }: QuestionType) {
       className="
         group select-none 
         px-4 pt-4 hover:pb-4 
-        rounded border dark:border-zinc-700
+        rounded border dark:border-zinc-800
         bg-zinc-100 dark:bg-zinc-800
         hover:bg-zinc-200 dark:hover:bg-zinc-700
       "

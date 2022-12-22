@@ -4,8 +4,8 @@
 - [ ] Follow button
 - [ ] Creation date of the question
 - [ ] Pagination
-- [ ] Search
+- [x] Search
 - [ ] Select profile picture (or upload)
 - [x] Generic navbar
-- [ ] Inneceary spacing in headers md tailwind
+- [x] Innecesary spacing in headers md tailwind
 - [ ] 

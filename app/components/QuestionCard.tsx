@@ -9,7 +9,7 @@ export default function QuestionCard({ body, tags, id }: QuestionType) {
         className="
         select-none 
         p-4
-        rounded border dark:border-zinc-700
+        rounded border dark:border-zinc-800
         bg-zinc-100 dark:bg-zinc-800
         focus:bg-zinc-200 dark:focus:bg-zinc-700
       "

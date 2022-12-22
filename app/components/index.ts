@@ -19,6 +19,8 @@ import ProfileCard from "./ProfileCard";
 
 import PageBackButton from "./PageBackButton";
 
+import PaginationQuestions from "./PaginationQuestions";
+
 export {
   AnalyticsWrapper,
   NavLink,
@@ -36,4 +38,6 @@ export {
   AppBottomBar,
 
   PageBackButton,
+
+  PaginationQuestions
 };

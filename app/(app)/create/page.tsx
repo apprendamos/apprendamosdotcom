@@ -42,13 +42,13 @@ export default function CreatePage() {
       <textarea
         className="
         bg-zinc-800
-        w-full h-96 border border-zinc-600 p-2 rounded"
+        w-full h-96 border border-zinc-800 p-2 rounded"
         value={body}
         onChange={(e) => setBody(e.target.value)}
       />
 
       <h1 className="font-black text-lg">Preview</h1>
-      <Article className="mb-4 border border-zinc-600 p-2 rounded h-96 select-none overflow-y-scroll">
+      <Article className="mb-4 border border-zinc-800 p-2 rounded h-96 select-none overflow-y-scroll">
         {body}
       </Article>
 

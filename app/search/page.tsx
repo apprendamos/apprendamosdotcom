@@ -20,22 +20,22 @@ export default function SearchPage(ctx: any) {
 
     return (
       <div className="flex flex-col space-y-4">
-        <div>
+        {data.questions && <div>
           <h1 className="font-bold mb-2">Questions</h1>
           <div className="flex flex-col space-y-4">
             {data.questions.map((question: QuestionType) => (
               <QuestionCard key={question.id} {...question} />
             ))}
           </div>
-        </div>
-        <div>
+        </div> }
+        { data.profiles && <div>
           <h1 className="font-bold mb-2">Users</h1>
           <div className="flex flex-col space-y-4">
             {data.profiles.map((profile: ProfileType) => (
               <ProfileCard key={profile.username} {...profile} />
             ))}
           </div>
-        </div>
+        </div>}
       </div>
     );
   }
