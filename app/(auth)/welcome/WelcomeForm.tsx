@@ -30,7 +30,7 @@ const TextInput = ({
       className="
         p-4
         flex flex-col 
-        border border-zinc-800 focus-within:border-zinc-500
+        border border-red-600/10 focus-within:border-zinc-500
         rounded
         group
       "
@@ -80,7 +80,7 @@ const ParagraphInput = ({
       className="
         p-4
         flex flex-col 
-        border border-zinc-800 focus-within:border-zinc-500
+        border border-red-600/10 focus-within:border-zinc-500
         rounded
         group
       "
@@ -121,7 +121,7 @@ const DatePicker = ({
     className="
         p-4
         flex flex-col 
-        border border-zinc-800 focus-within:border-zinc-500
+        border border-red-600/10 focus-within:border-zinc-500
         rounded
         group
       "

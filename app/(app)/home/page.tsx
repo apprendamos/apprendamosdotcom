@@ -5,7 +5,7 @@ import { xata } from "xata/client";
 import { PaginationQuestions } from "app/components";
 
 async function getQuestionsPage() {
-  const data = await xata.db.questions
+  const page = await xata.db.questions
     .filter(exists("author"))
     .sort("publication_date", "desc")
     .select([
@@ -14,7 +14,7 @@ async function getQuestionsPage() {
       "publication_date",
       "author.username",
       "author.name",
-      "author.image"
+      "author.image",
     ])
     .getPaginated({
       pagination: {
@@ -22,9 +22,7 @@ async function getQuestionsPage() {
       },
     });
 
-  const page = await JSON.parse(JSON.stringify(data));
-
-  return page;
+  return JSON.parse(JSON.stringify(page));
 }
 
 export default async function QuestionsPage() {

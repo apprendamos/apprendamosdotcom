@@ -5,6 +5,6 @@ export interface QuestionType {
   body: string;
   publication_date?: string;
   like_count?: number;
-  author?: ProfileType | null;
+  author?: ProfileType;
   tags?: string[];
 }

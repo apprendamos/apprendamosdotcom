@@ -10,7 +10,7 @@ async function getLikers(id: string) {
     .filter("question.id", id)
     .filter("like_status", true)
     .filter(exists("profile"))
-    .select(["profile.username", "profile.name"])
+    .select(["profile.username", "profile.name", "profile.image"])
     .getPaginated({
       pagination: {
         size: 15,

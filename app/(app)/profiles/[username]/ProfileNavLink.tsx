@@ -14,7 +14,7 @@ export default function ProfileNavLink({
   const isActive = pathname === href;
 
   return (
-    <Link href={href} className={"text-xl mt-4 font-bold mb-4 " + (isActive ? "text-blue-500" : "text-gray-500")}>
+    <Link href={href} className={"text-xl mt-4 font-bold mb-4 " + (isActive ? "text-red-600" : "text-gray-500")}>
       {children}
     </Link>
   );

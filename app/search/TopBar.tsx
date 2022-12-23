@@ -44,7 +44,7 @@ export default function Navbar() {
           rounded bg-transparent 
           px-4 py-1 m-0 
           outline-none ring-0 focus:ring-0
-          border border-zinc-800 focus:border-zinc-800
+          border border-red-600/10 focus:border-red-600/10
         "
         onKeyUp={(e) => {
           clearTimeout(timer.current);

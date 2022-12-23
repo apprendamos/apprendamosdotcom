@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html
       className={
-        "bg-zinc-100 dark:bg-zinc-900 flex flex-col " + inter.className
+        "flex flex-col " + inter.className
       }
       lang="en"
     >
@@ -31,7 +31,7 @@ export default function RootLayout({
         }}
       >
         <SessionProvider>
-          <body className="bg-zinc-200 dark:bg-zinc-900 border-x border-x-zinc-800 mx-auto min-h-screen w-screen sm:w-144 flex flex-col">
+          <body className="border-x border-x-red-600/10 mx-auto min-h-screen w-screen sm:w-144 flex flex-col">
             {children}
             <AnalyticsWrapper />
           </body>

@@ -8,14 +8,12 @@ async function getComments(id: string) {
   const page = await xata.db.comments
     .filter("question.id", id)
     .sort("publication_date", "desc")
-    .select(["*", "author.username", "author.name"])
+    .select(["*", "author.username", "author.name", "author.image"])
     .getPaginated({
       pagination: {
         size: 15,
       },
     });
-  
-  console.log(page);
 
   return page.records as CommentType[];
 }

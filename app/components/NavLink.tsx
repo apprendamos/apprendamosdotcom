@@ -18,7 +18,7 @@ export default function NavLink({
       href={href}
       className={
         "flex items-center justify-center " +
-        (isActive ? "text-blue-500" : "text-gray-500")
+        (isActive ? "text-red-600" : "text-gray-500")
       }
     >
       {children}
