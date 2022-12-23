@@ -11,15 +11,17 @@ async function getProfile(username: string) {
 }
 
 async function getQuestions(username: string) {
-  const page = await xata.db.questions
+  const data = await xata.db.questions
     .filter("author.username", username)
     .sort("publication_date", "desc")
-    .select(["*"])
+    .select(["id", "body", "publication_date"])
     .getPaginated({
       pagination: {
         size: 15,
       },
     });
+
+  const page = await JSON.parse(JSON.stringify(data));
 
   return page.records as QuestionType[];
 }

@@ -1,4 +1,4 @@
-export const revalidate = 10
+export const revalidate = 10;
 
 import { exists } from "@xata.io/client";
 import { xata } from "xata/client";
@@ -7,7 +7,7 @@ import Question from "./Question";
 import { QuestionType } from "types/QuestionType";
 
 async function getQuestions() {
-  const page = await xata.db.questions
+  const data = await xata.db.questions
     .filter(exists("author"))
     .sort("publication_date", "desc")
     .select([
@@ -23,6 +23,8 @@ async function getQuestions() {
       },
     });
 
+  const page = await JSON.parse(JSON.stringify(data));
+  
   return page.records as QuestionType[];
 }
 
