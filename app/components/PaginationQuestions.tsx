@@ -26,7 +26,7 @@ export default function PaginationQuestions({ firstPage }: { firstPage: any }) {
 
   return (
     <>
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-1">
         {questions?.map((question) => (
           <QuestionCardMedium key={question.id} {...question} />
         ))}

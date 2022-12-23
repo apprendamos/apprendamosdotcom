@@ -14,6 +14,7 @@ async function getQuestionsPage() {
       "publication_date",
       "author.username",
       "author.name",
+      "author.image"
     ])
     .getPaginated({
       pagination: {
