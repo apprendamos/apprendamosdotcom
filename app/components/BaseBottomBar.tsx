@@ -6,7 +6,7 @@ export default function BaseBottomBar({
   className?: string;
 }) {
   return (
-    <nav
+    <div
       className={`
         sticky bottom-0
         flex items-center justify-between flex-none
@@ -17,6 +17,6 @@ export default function BaseBottomBar({
       `}
     >
       {children}
-    </nav>
+    </div>
   );
 }

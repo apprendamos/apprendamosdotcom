@@ -31,7 +31,7 @@ export default function RootLayout({
         }}
       >
         <SessionProvider>
-          <body className="border-x border-x-red-600/10 mx-auto min-h-screen w-screen sm:w-144 flex flex-col">
+          <body className="border-x border-x-red-600/10 mx-auto w-screen sm:w-144 flex flex-col">
             {children}
             <AnalyticsWrapper />
           </body>

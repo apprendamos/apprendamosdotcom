@@ -35,7 +35,7 @@ export default function PaginationQuestions({ firstPage }: { firstPage: any }) {
         <button
           type="button"
           onClick={loadMore}
-          className="rounded-full flex mx-auto justify-center w-32 h-8 bg-red-600/10 items-center"
+          className="rounded-full flex mx-auto justify-center w-32 h-8 -mt-8 bg-red-600/50 focus:bg-red-600/80 items-center"
         >
           Load more
         </button>
