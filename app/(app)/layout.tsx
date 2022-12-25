@@ -1,5 +1,4 @@
-import { AppBottomBar } from "app/components";
-import TopBar from "./TopBar";
+import { AppTopBar, AppBottomBar } from "app/components";
 
 export default function RootLayout({
   children,
@@ -8,7 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <TopBar/>
+      <AppTopBar />
       <main>{children}</main>
       <AppBottomBar />
     </>

@@ -18,9 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      className={
-        "flex flex-col " + inter.className
-      }
+      className={"h-full w-full m-0 p-0 overflow-x-hidden " + inter.className}
       lang="en"
     >
       <SWRConfig
@@ -31,8 +29,19 @@ export default function RootLayout({
         }}
       >
         <SessionProvider>
-          <body className="border-x border-x-red-600/10 mx-auto w-screen sm:w-144 flex flex-col">
-            {children}
+          <body className="h-full w-full m-0 p-0 overflow-x-hidden">
+            <div
+              id="__magic"
+              className={`
+                min-h-full w-full sm:w-144 
+                mx-auto 
+                flex flex-col 
+                border-x-none sm:border-x sm:border-x-red-600/30
+              `}
+            >
+              {children}
+            </div>
+
             <AnalyticsWrapper />
           </body>
         </SessionProvider>

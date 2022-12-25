@@ -1,9 +1,7 @@
-import AuthButton from "./AuthButton";
-import NavLink from "./NavLink";
 import { BaseTopBar } from "app/components";
 
 
-export default function Navbar() {
+export default function AppTopBar() {
   return (
     <BaseTopBar>
       <button className="text-sm">

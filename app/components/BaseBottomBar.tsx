@@ -8,12 +8,11 @@ export default function BaseBottomBar({
   return (
     <div
       className={`
-        sticky bottom-0
+        fixed bottom-0 z-50
         flex items-center justify-between flex-none
-        h-[2.5rem] px-4 
-        border-t border-red-600/10 
+        h-[2.5rem] w-full sm:w-144 mx-auto px-4
         bg-zinc-900/50 backdrop-blur-sm
-        ${className}
+        ${className || ""}
       `}
     >
       {children}

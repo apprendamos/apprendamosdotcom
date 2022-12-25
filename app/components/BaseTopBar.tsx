@@ -8,12 +8,11 @@ export default function BaseTopBar({
   return (
     <header
       className={`
-        sticky top-0
+        sticky top-0 z-50
         flex items-center justify-between flex-none
         h-[2.5rem] px-4
-        border-b border-red-600/10
         bg-zinc-900/50 backdrop-blur-sm
-        ${className}
+        ${className || ""}
       `}
     >
       {children}

@@ -12,6 +12,7 @@ import QuestionCardMedium from "./QuestionCardMedium";
 import BaseTopBar from "./BaseTopBar";
 import BaseBottomBar from "./BaseBottomBar";
 
+import AppTopBar from "./AppTopBar";
 import AppBottomBar from "./AppBottomBar";
 
 import QuestionCard from "./QuestionCard";
@@ -20,6 +21,9 @@ import ProfileCard from "./ProfileCard";
 import PageBackButton from "./PageBackButton";
 
 import PaginationQuestions from "./PaginationQuestions";
+
+import QuestionActions from "./QuestionActions";
+
 
 export {
   AnalyticsWrapper,
@@ -35,9 +39,12 @@ export {
   BaseTopBar,
   BaseBottomBar,
 
+  AppTopBar,
   AppBottomBar,
 
   PageBackButton,
 
-  PaginationQuestions
+  PaginationQuestions,
+
+  QuestionActions
 };
