@@ -1,6 +1,6 @@
 import { ProfileType } from "./ProfileType";
 
-export interface QuestionType {
+export interface ArticleType {
   id: string;
   body: string;
   publication_date?: string;

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { xata } from "xata/client";
-import { QuestionsRecord } from "xata";
+import { ArticlesRecord } from "xata";
 import { exists, Page, SelectedPick } from "@xata.io/client";
 
 import { getSession } from "next-auth/react";
@@ -13,9 +13,9 @@ type Data =
       error?: string;
     }
   | Page<
-      QuestionsRecord,
+      ArticlesRecord,
       SelectedPick<
-        QuestionsRecord,
+        ArticlesRecord,
         (
           | "body"
           | "publication_date"
@@ -40,7 +40,7 @@ export default async function handler(
 
       const profile = (session.user as AuthUserType).profile;
 
-      const created = await xata.db.questions.create({
+      const created = await xata.db.articles.create({
         body: req.body.body,
         author: profile?.id,
         publication_date: new Date(),
@@ -56,7 +56,7 @@ export default async function handler(
         return;
       }
 
-      const page = await xata.db.questions
+      const page = await xata.db.articles
         .filter(exists("author"))
         .sort("publication_date", "desc")
         .select([

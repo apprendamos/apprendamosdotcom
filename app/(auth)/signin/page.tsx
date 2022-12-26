@@ -7,8 +7,7 @@ export default async function SignInPage() {
   if (!providers) return null;
 
   providers["twitter"]["name"] = "Twitter";
-  console.log(providers);
-
+  
   return (
     <>
     <h1 className="text-2xl font-bold text-center pb-4">Sign in</h1>

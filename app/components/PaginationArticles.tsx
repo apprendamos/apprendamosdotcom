@@ -1,16 +1,16 @@
 "use client";
 
 import useSWRInfinite from "swr/infinite";
-import { QuestionCardMedium } from "app/components";
+import { ArticleCardMedium } from "app/components";
 
-export default function PaginationQuestions({ firstPage }: { firstPage: any }) {
+export default function PaginationArticles({ firstPage }: { firstPage: any }) {
   const getKey = (pageIndex: any, previousPageData: any) => {
     if (previousPageData && !previousPageData.meta.page.more) return null;
 
     if (pageIndex === 0)
-      return `/api/questions?after=${firstPage.meta.page.cursor}`;
+      return `/api/articles?after=${firstPage.meta.page.cursor}`;
 
-    return `/api/questions?after=${previousPageData.meta.page.cursor}`;
+    return `/api/articles?after=${previousPageData.meta.page.cursor}`;
   };
 
   const { data, size, setSize } = useSWRInfinite(getKey);
@@ -21,14 +21,14 @@ export default function PaginationQuestions({ firstPage }: { firstPage: any }) {
     setSize(size + 1);
   };
 
-  let questions = data ? data.map((page) => page.records).flat() : [];
-  questions = firstPage.records.concat(questions);
+  let articles = data ? data.map((page) => page.records).flat() : [];
+  articles = firstPage.records.concat(articles);
 
   return (
     <>
       <div className="flex flex-col space-y-1">
-        {questions?.map((question) => (
-          <QuestionCardMedium key={question.id} {...question} />
+        {articles?.map((article) => (
+          <ArticleCardMedium key={article.id} {...article} />
         ))}
       </div>
       {hasNextPage && (

@@ -2,7 +2,7 @@
 
 - [ ] Like button
 - [ ] Follow button
-- [ ] Creation date of the question
+- [ ] Creation date of the article
 - [x] Pagination
 - [x] Search
 - [ ] Select profile picture (or upload)

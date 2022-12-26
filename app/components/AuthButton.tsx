@@ -6,12 +6,7 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
-import {
-  GearIcon,
-  ExitIcon,
-  EnterIcon,
-  Pencil2Icon,
-} from "@radix-ui/react-icons";
+import { GearIcon, Pencil2Icon } from "@radix-ui/react-icons";
 
 import * as Popover from "@radix-ui/react-popover";
 
@@ -24,7 +19,7 @@ export default function AuthButton() {
 
   if (status === "loading") {
     return (
-      <div className="animate-pulse w-9 h-9 rounded-full bg-zinc-500 border border-gray-500" />
+      <div className="animate-pulse w-9 h-9 rounded-full bg-red-600" />
     );
   }
 
@@ -58,10 +53,7 @@ export default function AuthButton() {
             </button>
           </Popover.Trigger>
           <Popover.Portal>
-            <Popover.Content
-              className="bg-zinc-600 rounded p-2"
-              sideOffset={5}
-            >
+            <Popover.Content className="bg-zinc-600 rounded p-2" sideOffset={5}>
               <div className="flex flex-col gap-2">
                 <Link
                   href={`/profiles/${profile?.username}`}
@@ -99,7 +91,6 @@ export default function AuthButton() {
                   onClick={() => signOut()}
                   className="group flex items-center space-x-2 hover:bg-red-500 rounded p-1"
                 >
-                  <ExitIcon className="w-5 h-5 group-hover:text-white" />
                   <h1 className="font-medium group-hover:text-white">
                     Sign Out
                   </h1>
@@ -116,9 +107,14 @@ export default function AuthButton() {
     <button
       type="button"
       onClick={() => signIn()}
-      className="group flex items-center space-x-2 hover:bg-red-500 rounded p-1"
+      className="
+        w-20 h-8
+        group 
+        flex items-center justify-center
+        bg-red-600/30 focus:bg-red-600/50 
+        rounded
+      "
     >
-      <EnterIcon className="w-5 h-5 group-hover:text-white" />
       <h1 className="font-medium group-hover:text-white">Sign In</h1>
     </button>
   );

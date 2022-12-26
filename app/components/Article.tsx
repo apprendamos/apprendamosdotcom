@@ -1,28 +1,34 @@
-import showdown from "showdown";
-showdown.setOption("tables", true);
 
-export default function Article({
-  children,
-  className,
-}: {
-  children: string;
-  className?: string;
-}) {
-  const converter = new showdown.Converter();
-  const html = converter.makeHtml(children);
+import { MarkdownArticle } from "app/components";
+import Link from "next/link";
+import { ArticleType, ProfileType } from "types";
+
+import { Profile } from "app/components";
+
+export default function Article({ body, author, id }: ArticleType) {
+  const profile = author || {
+    name: "Unknown",
+    username: "not_found",
+  };
 
   return (
-    <article
-      className={`
-        prose prose-zinc 
-        prose-headings:my-1 
-        prose-p:my-0.5 
-        prose-pre:my-1 
-        prose-img:rounded prose-img:my-0.5 
-        overflow-hidden 
-        dark:prose-invert ${className}
-      `}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <div
+      className="
+        group select-none 
+        px-4 pt-4 hover:pb-4 
+        rounded border dark:border-red-600/10
+        bg-zinc-100 dark:bg-zinc-800
+        hover:bg-zinc-200 dark:hover:bg-zinc-700
+      "
+    >
+      <Profile {...(profile as ProfileType)} />
+      <MarkdownArticle className="max-h-60">{body}</MarkdownArticle>
+      <Link
+        className="invisible group-hover:visible hover:font-bold"
+        href={`/articles/${id}`}
+      >
+        Ver más...
+      </Link>
+    </div>
   );
 }

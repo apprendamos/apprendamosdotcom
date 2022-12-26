@@ -14,7 +14,7 @@ export default async function handler(
       const records = await xata.search.byTable(queryString, {
         tables: [
           {
-            table: "questions",
+            table: "articles",
             target: [{ column: "hashtags" }, { column: "body" }],
             boosters: [
               {

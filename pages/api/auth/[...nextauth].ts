@@ -29,18 +29,11 @@ export const authOptions = {
     error: "/error",
   },
   callbacks: {
-    async session({
-      session,
-      user,
-    }: {
-      session: Session;
-      user: AuthUserType;
-    }) {
-      (session.user as AuthUserType) = { ...user };
+    async session({ session, user }: { session: Session; user: AuthUserType }) {
+      (session.user as AuthUserType) = user;
       return session;
     },
     async signIn({ user, account, profile, email, credentials }: any) {
-      console.log("user", user);
       if (user.blocked_status) {
         return "/blocked";
       }

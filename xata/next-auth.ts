@@ -100,6 +100,7 @@ export function XataAdapter(): Adapter {
             name: user?.profile?.name,
             image: user?.profile?.image,
             username: user?.profile?.username,
+            bio: user?.profile?.bio,
           },
         },
       };

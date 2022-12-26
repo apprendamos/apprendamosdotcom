@@ -2,12 +2,12 @@ export const revalidate = 10;
 
 import { exists } from "@xata.io/client";
 import { xata } from "xata/client";
-import Question from "./Question";
+import Article from "./Article";
 
-import { QuestionType } from "types/QuestionType";
+import { ArticleType } from "types/ArticleType";
 
-async function getQuestions() {
-  const data = await xata.db.questions
+async function getArticles() {
+  const data = await xata.db.articles
     .filter(exists("author"))
     .sort("publication_date", "desc")
     .select([
@@ -25,16 +25,16 @@ async function getQuestions() {
 
   const page = await JSON.parse(JSON.stringify(data));
   
-  return page.records as QuestionType[];
+  return page.records as ArticleType[];
 }
 
-export default async function QuestionsPage() {
-  const questions = await getQuestions();
+export default async function ArticlesPage() {
+  const articles = await getArticles();
 
   return (
     <div className="space-y-4">
-      {questions.map((question) => (
-        <Question key={question.id} {...question} />
+      {articles.map((article) => (
+        <Article key={article.id} {...article} />
       ))}
     </div>
   );

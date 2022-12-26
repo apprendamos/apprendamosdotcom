@@ -1,10 +1,10 @@
-import { Article } from "app/components";
+import { MarkdownArticle } from "app/components";
 import Link from "next/link";
-import { QuestionType, ProfileType } from "types";
+import { ArticleType, ProfileType } from "types";
 
 import { Profile } from "app/components";
 
-export default function Question({ body, author, id }: QuestionType) {
+export default function Article({ body, author, id }: ArticleType) {
   const profile = author || {
     name: "Unknown",
     username: "not_found",
@@ -21,10 +21,10 @@ export default function Question({ body, author, id }: QuestionType) {
       "
     >
       <Profile {...(profile as ProfileType)} />
-      <Article className="max-h-60">{body}</Article>
+      <MarkdownArticle className="max-h-60">{body}</MarkdownArticle>
       <Link
         className="invisible group-hover:visible hover:font-bold"
-        href={`/questions/${id}`}
+        href={`/articles/${id}`}
       >
         Ver más...
       </Link>

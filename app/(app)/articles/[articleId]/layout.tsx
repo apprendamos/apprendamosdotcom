@@ -3,11 +3,11 @@ export const revalidate = 10;
 import { notFound } from "next/navigation";
 import { ProfileType } from "types";
 import { xata } from "xata/client";
-import { Article, Profile } from "app/components";
-import QuestionNavbar from "./QuestionNavbar";
+import { MarkdownArticle, Profile } from "app/components";
+import ArticleNavbar from "./ArticleNavbar";
 
-async function getQuestion(id: string) {
-  const record = await xata.db.questions.read(id);
+async function getArticle(id: string) {
+  const record = await xata.db.articles.read(id);
   return record;
 }
 
@@ -17,20 +17,20 @@ async function getProfile(id: string) {
 }
 
 
-export default async function SingleQuestionPage({
+export default async function SingleArticlePage({
   params,
   children,
 }: {
-  params: { questionId: string };
+  params: { articleId: string };
   children: React.ReactNode;
 }) {
-  const question = await getQuestion(params.questionId);
+  const article = await getArticle(params.articleId);
 
-  if (!question) {
+  if (!article) {
     return notFound();
   }
 
-  const author = await getProfile(question.author?.id as string);
+  const author = await getProfile(article.author?.id as string);
 
   const profile = (author || {
     name: "Unknown",
@@ -40,8 +40,8 @@ export default async function SingleQuestionPage({
   return (
     <>
       <Profile {...profile} />
-      <Article>{question?.body as string}</Article>
-      <QuestionNavbar questionId={params.questionId} />
+      <MarkdownArticle>{article?.body as string}</MarkdownArticle>
+      <ArticleNavbar articleId={params.articleId} />
       {children}
     </>
   );

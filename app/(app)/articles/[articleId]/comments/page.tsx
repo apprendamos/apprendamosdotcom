@@ -6,7 +6,7 @@ import { Comment } from "app/components";
 
 async function getComments(id: string) {
   const page = await xata.db.comments
-    .filter("question.id", id)
+    .filter("article.id", id)
     .sort("publication_date", "desc")
     .select(["*", "author.username", "author.name", "author.image"])
     .getPaginated({
@@ -18,12 +18,12 @@ async function getComments(id: string) {
   return page.records as CommentType[];
 }
 
-export default async function QuestionCommentsPage({
+export default async function ArticleCommentsPage({
   params,
 }: {
-  params: { questionId: string };
+  params: { articleId: string };
 }) {
-  const comments = await getComments(params.questionId);
+  const comments = await getComments(params.articleId);
 
   if (!comments) {
     return <p className="text-gray-500">Aún no hay comentarios</p>;

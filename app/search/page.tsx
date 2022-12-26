@@ -1,8 +1,8 @@
 "use client";
 
 import useSWR from "swr";
-import { QuestionCard, ProfileCard } from "app/components";
-import { QuestionType, ProfileType } from "types";
+import { ArticleCard, ProfileCard } from "app/components";
+import { ArticleType, ProfileType } from "types";
 
 export default function SearchPage(ctx: any) {
   const {
@@ -20,11 +20,11 @@ export default function SearchPage(ctx: any) {
 
     return (
       <div className="flex flex-col space-y-4">
-        {data.questions && <div>
-          <h1 className="font-bold mb-2">Questions</h1>
+        {data.articles && <div>
+          <h1 className="font-bold mb-2">Articles</h1>
           <div className="flex flex-col space-y-4">
-            {data.questions.map((question: QuestionType) => (
-              <QuestionCard key={question.id} {...question} />
+            {data.articles.map((article: ArticleType) => (
+              <ArticleCard key={article.id} {...article} />
             ))}
           </div>
         </div> }

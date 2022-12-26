@@ -6,8 +6,8 @@ import { Profile } from "app/components";
 import { ProfileType } from "types";
 
 async function getLikers(id: string) {
-  const page = await xata.db.profile_question_rels
-    .filter("question.id", id)
+  const page = await xata.db.profile_article_rels
+    .filter("article.id", id)
     .filter("like_status", true)
     .filter(exists("profile"))
     .select(["profile.username", "profile.name", "profile.image"])
@@ -20,13 +20,13 @@ async function getLikers(id: string) {
   return page.records.map((rel) => rel.profile) as ProfileType[];
 }
 
-export default async function QuestionLikersPage({
+export default async function ArticleLikersPage({
   params,
 }: {
-  params: { questionId: string };
+  params: { articleId: string };
 }) {
 
-  const likers = await getLikers(params.questionId);
+  const likers = await getLikers(params.articleId);
 
   if (!likers) {
     return <p className="text-gray-500">Not any likers for now</p>;

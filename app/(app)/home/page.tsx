@@ -2,10 +2,10 @@ export const revalidate = 10;
 
 import { exists } from "@xata.io/client";
 import { xata } from "xata/client";
-import { PaginationQuestions } from "app/components";
+import { PaginationArticles } from "app/components";
 
-async function getQuestionsPage() {
-  const page = await xata.db.questions
+async function getArticlesPage() {
+  const page = await xata.db.articles
     .filter(exists("author"))
     .sort("publication_date", "desc")
     .select([
@@ -25,8 +25,8 @@ async function getQuestionsPage() {
   return JSON.parse(JSON.stringify(page));
 }
 
-export default async function QuestionsPage() {
-  const page = await getQuestionsPage();
+export default async function ArticlesPage() {
+  const page = await getArticlesPage();
 
-  return <PaginationQuestions firstPage={page} />;
+  return <PaginationArticles firstPage={page} />;
 }

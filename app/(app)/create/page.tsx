@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Article } from "app/components";
+import { MarkdownArticle } from "app/components";
 import { useRouter } from "next/navigation";
 
 export default function CreatePage() {
@@ -10,10 +10,10 @@ export default function CreatePage() {
     "# What are you thinking about?\nShare your thoughts with the world!"
   );
 
-  const createQuestion = async () => {
+  const createArticle = async () => {
     setSending(true);
 
-    const response = await fetch("/api/questions", {
+    const response = await fetch("/api/articles", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,10 +23,8 @@ export default function CreatePage() {
 
     const { id } = await response.json();
 
-    console.log("Created question with id", id);
-
     if (id) {
-      router.push(`/questions/${id}`);
+      router.push(`/articles/${id}`);
       router.refresh();
     }
 
@@ -48,13 +46,13 @@ export default function CreatePage() {
       />
 
       <h1 className="font-black text-lg">Preview</h1>
-      <Article className="mb-4 border border-red-600/10 p-2 rounded h-96 select-none overflow-y-scroll">
+      <MarkdownArticle className="mb-4 border border-red-600/10 p-2 rounded h-96 select-none overflow-y-scroll">
         {body}
-      </Article>
+      </MarkdownArticle>
 
       <button
         disabled={sending}
-        onClick={createQuestion}
+        onClick={createArticle}
         className="disabled:bg-zinc-400 bg-zinc-600 text-white font-bold py-2 px-4 rounded"
       >
         Create

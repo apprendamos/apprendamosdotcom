@@ -1,17 +1,17 @@
 import Image from "next/image";
 
-import { Article, QuestionActions } from "app/components";
+import { ArticleActions, MarkdownArticle } from "app/components";
 import Link from "next/link";
-import { QuestionType } from "types";
+import { ArticleType } from "types";
 
 import { formatRelativeTime } from "utils";
 
-export default function QuestionCardMedium({
+export default function ArticleCardMedium({
   body,
   author,
   id,
   publication_date,
-}: QuestionType) {
+}: ArticleType) {
   const profile = author || {
     name: "Unknown",
     username: "not_found",
@@ -54,16 +54,18 @@ export default function QuestionCardMedium({
             <span className="font-medium text-zinc-600">@{username}</span>
           </Link>
 
-          <Link href={`/questions/${id}`} className="text-xs text-zinc-600">
+          <Link href={`/articles/${id}`} className="text-xs text-zinc-600">
             {formatRelativeTime(publication_date)}
           </Link>
 
-          <Link href={`/questions/${id}`}>
-            <Article className="max-h-60 prose-sm">{body}</Article>
-            <QuestionActions />
+          <Link href={`/articles/${id}`}>
+            <MarkdownArticle className="max-h-60 prose-sm">
+              {body}
+            </MarkdownArticle>
           </Link>
         </div>
       </div>
+      <ArticleActions />
     </div>
   );
 }

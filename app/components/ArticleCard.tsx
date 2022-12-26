@@ -1,10 +1,10 @@
-import { Article } from "app/components";
+import { MarkdownArticle } from "app/components";
 import Link from "next/link";
-import { QuestionType } from "types";
+import { ArticleType } from "types";
 
-export default function QuestionCard({ body, tags, id }: QuestionType) {
+export default function ArticleCard({ body, tags, id }: ArticleType) {
   return (
-    <Link href={`/questions/${id}`}>
+    <Link href={`/articles/${id}`}>
       <div
         className="
         select-none 
@@ -14,7 +14,7 @@ export default function QuestionCard({ body, tags, id }: QuestionType) {
         focus:bg-zinc-200 dark:focus:bg-zinc-700
       "
       >
-        <Article className="max-h-64 prose-sm">{body}</Article>
+        <MarkdownArticle className="max-h-64 prose-sm">{body}</MarkdownArticle>
       </div>
     </Link>
   );
