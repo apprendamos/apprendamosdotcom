@@ -7,24 +7,7 @@ import { exists, Page, SelectedPick } from "@xata.io/client";
 import { getSession } from "next-auth/react";
 import { AuthUserType } from "types";
 
-type Data =
-  | {
-      id?: string;
-      error?: string;
-    }
-  | Page<
-      ArticlesRecord,
-      SelectedPick<
-        ArticlesRecord,
-        (
-          | "body"
-          | "publication_date"
-          | "id"
-          | "author.username"
-          | "author.name"
-        )[]
-      >
-    >;
+type Data = any;
 
 export default async function handler(
   req: NextApiRequest,
@@ -49,12 +32,7 @@ export default async function handler(
 
       break;
     case "GET":
-      const { after } = req.query;
-
-      if (!after) {
-        res.status(400).json({ error: "Missing after query parameter" });
-        return;
-      }
+      const { cursor } = req.query;
 
       const page = await xata.db.articles
         .filter(exists("author"))
@@ -69,16 +47,26 @@ export default async function handler(
         .getPaginated({
           pagination: {
             size: 5,
-            after: after ? after.toString() : undefined,
+            after: cursor as string | undefined,
           },
         });
+
+      const records = page.records.map((record) => {
+        return {
+          ...record,
+          body: record.body.slice(0, 280),
+        };
+      });
 
       if (!page) {
         res.status(404).json({ error: "Page not found" });
         return;
       }
 
-      res.status(200).json(page);
+      res.status(200).json({
+        ...page,
+        records,
+      });
     default:
       res.status(404).end();
   }

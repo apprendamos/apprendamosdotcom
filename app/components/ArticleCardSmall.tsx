@@ -2,16 +2,15 @@ import { MarkdownArticle } from "app/components";
 import Link from "next/link";
 import { ArticleType } from "types";
 
-export default function ArticleCard({ body, tags, id }: ArticleType) {
+export default function ArticleCardSmall({ body, tags, id }: ArticleType) {
   return (
     <Link href={`/articles/${id}`}>
       <div
         className="
-        select-none 
-        p-4
-        rounded border dark:border-red-600/10
-        bg-zinc-100 dark:bg-zinc-800
-        focus:bg-zinc-200 dark:focus:bg-zinc-700
+        p-2
+        border-y border-red-600/10
+        dark:focus-within:border-red-600/30
+        bg-zinc-100 dark:bg-zinc-900/50
       "
       >
         <MarkdownArticle className="max-h-64 prose-sm">{body}</MarkdownArticle>

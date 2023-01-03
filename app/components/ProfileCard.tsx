@@ -1,16 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ProfileType } from "types";
-import { randomIntFromInterval } from "utils";
 
 export default function ProfileCard({
   name,
   username,
   bio,
+  image,
   follower_count,
 }: ProfileType) {
-  const rndInt = randomIntFromInterval(1, 50);
-
   return (
     <Link href={`/profiles/${username}`}>
       <div
@@ -24,7 +22,7 @@ export default function ProfileCard({
       >
         <Image
           alt={`${username} profile picture`}
-          src={`https://xsgames.co/randomusers/assets/avatars/pixel/${rndInt}.jpg`}
+          src={image}
           width={50}
           height={50}
           className="rounded-full border"
@@ -35,9 +33,13 @@ export default function ProfileCard({
             <h1 className="font-medium text-gray-500">@{username}</h1>
           </div>
           {bio && <p className="text-sm text-gray-500">{bio}</p>}
-          {follower_count && follower_count > 0 && (
+          {follower_count && follower_count > 0 ? (
             <div className="text-xs text-gray-500">
               {follower_count} followers
+            </div>
+          ) : (
+            <div className="text-xs text-gray-500">
+              Be the first to follow {name.split(" ")[0]}
             </div>
           )}
         </div>

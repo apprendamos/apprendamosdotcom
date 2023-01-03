@@ -3,7 +3,7 @@ export const revalidate = 10;
 import { xata } from "xata/client";
 
 import { ProfileType, ArticleType } from "types";
-import { Article } from "app/components";
+import { ArticleCardSmall } from "app/components";
 
 async function getProfile(username: string) {
   const records = await xata.db.profiles.filter("username", username).getAll();
@@ -37,7 +37,7 @@ export default async function ProfileArticlesPage({
   return (
     <div className="space-y-4">
       {articles.map((article) => (
-        <Article
+        <ArticleCardSmall
           key={article.id}
           {...article}
           author={profile as ProfileType}

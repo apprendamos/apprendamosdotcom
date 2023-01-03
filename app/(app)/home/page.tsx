@@ -1,32 +1,32 @@
-export const revalidate = 10;
+"use client";
 
-import { exists } from "@xata.io/client";
-import { xata } from "xata/client";
-import { PaginationArticles } from "app/components";
+import { Pagination, ArticleCardMedium } from "app/components";
 
-async function getArticlesPage() {
-  const page = await xata.db.articles
-    .filter(exists("author"))
-    .sort("publication_date", "desc")
-    .select([
-      "id",
-      "body",
-      "publication_date",
-      "author.username",
-      "author.name",
-      "author.image",
-    ])
-    .getPaginated({
-      pagination: {
-        size: 5,
-      },
-    });
+const LoadMoreButton = () => (
+  <button
+    className={`
+            rounded-full 
+            flex mx-auto items-center
+            justify-center 
+            w-32 h-8 my-2 
+            bg-red-600/50 focus:bg-red-600/80
+          `}
+  >
+    Load more
+  </button>
+);
 
-  return JSON.parse(JSON.stringify(page));
-}
+const Wrapper = ({ children }: { children: any }) => (
+  <div className="flex flex-col space-y-1">{children}</div>
+);
 
-export default async function ArticlesPage() {
-  const page = await getArticlesPage();
-
-  return <PaginationArticles firstPage={page} />;
+export default function ArticlesPage() {
+  return (
+    <Pagination
+      apiUrl="/api/articles"
+      Item={ArticleCardMedium}
+      LoadMoreButton={LoadMoreButton}
+      Wrapper={Wrapper}
+    />
+  );
 }

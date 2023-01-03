@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { ArticleCard, ProfileCard } from "app/components";
+import { ArticleCardSmall, ProfileCard } from "app/components";
 import { ArticleType, ProfileType } from "types";
 
 export default function SearchPage(ctx: any) {
@@ -24,7 +24,7 @@ export default function SearchPage(ctx: any) {
           <h1 className="font-bold mb-2">Articles</h1>
           <div className="flex flex-col space-y-4">
             {data.articles.map((article: ArticleType) => (
-              <ArticleCard key={article.id} {...article} />
+              <ArticleCardSmall key={article.id} {...article} />
             ))}
           </div>
         </div> }

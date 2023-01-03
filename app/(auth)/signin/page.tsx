@@ -11,7 +11,7 @@ export default async function SignInPage() {
   return (
     <>
     <h1 className="text-2xl font-bold text-center pb-4">Sign in</h1>
-    <div className="flex flex-col space-y-2 items-center">
+    <div className="flex flex-col items-center">
       {Object.values(providers).map((provider) => (
         <Button key={provider.id} provider={provider} />
       ))}

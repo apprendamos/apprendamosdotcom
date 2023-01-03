@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatedButton } from "app/components";
 import { useSession, signOut, signIn } from "next-auth/react";
 
 export default function SignButton() {
@@ -21,41 +22,11 @@ export default function SignButton() {
 
   if (session && session.user) {
     return (
-      <button
-        className="
-          mt-4 mx-auto
-          flex items-center justify-center
-          py-2
-          w-32 h-10
-          rounded-full
-          font-bold text-lg
-          text-zinc-100
-          bg-zinc-900
-          border border-zinc-100
-        "
-        onClick={() => signOut()}
-      >
+      <AnimatedButton color="zinc" onClick={() => signOut()}>
         Sign Out
-      </button>
+      </AnimatedButton>
     );
   }
 
-  return (
-    <button
-      className="
-        mt-4 mx-auto
-        flex items-center justify-center
-        py-2
-        w-32 h-10
-        rounded-full
-        font-bold text-lg
-        text-zinc-100
-        bg-red-600
-        border border-red-600
-      "
-      onClick={() => signIn()}
-    >
-      Sign In
-    </button>
-  );
+  return <AnimatedButton onClick={() => signIn()}>Sign In</AnimatedButton>;
 }

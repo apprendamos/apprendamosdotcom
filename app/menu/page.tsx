@@ -1,6 +1,8 @@
-import ProfileButton  from "./ProfileButton";
-import MenuLink  from "./MenuLink";
-import SignButton  from "./SignButton";
+import ProfileButton from "./ProfileButton";
+import MenuLink from "./MenuLink";
+import SignButton from "./SignButton";
+
+import { AnimatedButton } from "app/components";
 
 export default function Page() {
   return (
@@ -14,6 +16,7 @@ export default function Page() {
         <MenuLink href="/privacy">Privacy Policy</MenuLink>
       </div>
       <SignButton />
+      <AnimatedButton color="green">Load more</AnimatedButton>
     </div>
   );
 }
