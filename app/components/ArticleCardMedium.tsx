@@ -65,7 +65,7 @@ export default function ArticleCardMedium({
           </Link>
         </div>
       </div>
-      <ArticleActions />
+      <ArticleActions articleId={id} />
     </div>
   );
 }

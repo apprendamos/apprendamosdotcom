@@ -52,6 +52,12 @@ const tables = [
       { name: "children_count", type: "int", notNull: true, defaultValue: "0" },
       { name: "comment_count", type: "int", notNull: true, defaultValue: "0" },
       { name: "parent", type: "link", link: { table: "articles" } },
+      {
+        name: "is_question",
+        type: "bool",
+        notNull: true,
+        defaultValue: "false",
+      },
     ],
   },
   {
@@ -61,6 +67,8 @@ const tables = [
       { name: "like_status", type: "bool", defaultValue: "false" },
       { name: "profile", type: "link", link: { table: "profiles" } },
       { name: "comment_count", type: "int", notNull: true, defaultValue: "0" },
+      { name: "children_count", type: "int", notNull: true, defaultValue: "0" },
+      { name: "star_count", type: "int", notNull: true, defaultValue: "0" },
     ],
   },
   {
@@ -111,10 +119,10 @@ const tables = [
     ],
   },
   {
-    name: "sponsor_article_rels",
+    name: "sponsor_question_rels",
     columns: [
       { name: "sponsor", type: "link", link: { table: "profiles" } },
-      { name: "article", type: "link", link: { table: "articles" } },
+      { name: "question", type: "link", link: { table: "articles" } },
       { name: "message", type: "string" },
     ],
   },
@@ -164,8 +172,8 @@ export type CommentsRecord = Comments & XataRecord;
 export type FollowerFolloweeRels = InferredTypes["follower_followee_rels"];
 export type FollowerFolloweeRelsRecord = FollowerFolloweeRels & XataRecord;
 
-export type SponsorArticleRels = InferredTypes["sponsor_article_rels"];
-export type SponsorArticleRelsRecord = SponsorArticleRels & XataRecord;
+export type SponsorQuestionRels = InferredTypes["sponsor_question_rels"];
+export type SponsorQuestionRelsRecord = SponsorQuestionRels & XataRecord;
 
 export type Users = InferredTypes["users"];
 export type UsersRecord = Users & XataRecord;
@@ -180,7 +188,7 @@ export type DatabaseSchema = {
   accounts: AccountsRecord;
   comments: CommentsRecord;
   follower_followee_rels: FollowerFolloweeRelsRecord;
-  sponsor_article_rels: SponsorArticleRelsRecord;
+  sponsor_question_rels: SponsorQuestionRelsRecord;
   users: UsersRecord;
   sessions: SessionsRecord;
 };

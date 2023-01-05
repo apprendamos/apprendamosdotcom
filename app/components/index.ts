@@ -29,6 +29,8 @@ import Pagination from "./Pagination";
 
 
 import AnimatedButton from "./AnimatedButton";
+import ReactionButton from "./ReactionButton";
+
 
 export {
   AnalyticsWrapper,
@@ -48,5 +50,6 @@ export {
   ArticleActions,
   AuthButton,
   Pagination,
-  AnimatedButton
+  AnimatedButton,
+  ReactionButton,
 };

@@ -1,39 +1,26 @@
-export const revalidate = 10;
+"use client";
 
-import { CommentType } from "types";
-import { xata } from "xata/client";
-import { Comment } from "app/components";
+import { Pagination, Comment } from "app/components";
+import { usePathname } from 'next/navigation'
 
-async function getComments(id: string) {
-  const page = await xata.db.comments
-    .filter("article.id", id)
-    .sort("publication_date", "desc")
-    .select(["*", "author.username", "author.name", "author.image"])
-    .getPaginated({
-      pagination: {
-        size: 15,
-      },
-    });
 
-  return page.records as CommentType[];
-}
+const Wrapper = ({ children }: { children: any }) => (
+  <div className="flex flex-col space-y-1">{children}</div>
+);
 
-export default async function ArticleCommentsPage({
-  params,
-}: {
-  params: { articleId: string };
-}) {
-  const comments = await getComments(params.articleId);
 
-  if (!comments) {
-    return <p className="text-gray-500">Aún no hay comentarios</p>;
+export default function ArticleChildrenPage() {
+  const pathname = usePathname();
+
+  if (!pathname) {
+    return null;
   }
 
   return (
-    <div className="space-y-4">
-      {comments.map((comment) => (
-        <Comment key={comment.id} {...comment} />
-      ))}
-    </div>
+    <Pagination
+      apiUrl={`/api${pathname}`}
+      Item={Comment}
+      Wrapper={Wrapper}
+    />
   );
 }

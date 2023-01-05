@@ -16,7 +16,6 @@ async function getProfile(id: string) {
   return record;
 }
 
-
 export default async function SingleArticlePage({
   params,
   children,
@@ -39,8 +38,12 @@ export default async function SingleArticlePage({
 
   return (
     <>
-      <Profile {...profile} />
-      <MarkdownArticle>{article?.body as string}</MarkdownArticle>
+      <div className="px-4">
+        <Profile {...profile} />
+      </div>
+      <MarkdownArticle className="pl-4 pr-2">
+        {article?.body as string}
+      </MarkdownArticle>
       <ArticleNavbar articleId={params.articleId} />
       {children}
     </>

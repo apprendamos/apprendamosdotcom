@@ -20,7 +20,7 @@ export default function MarkdownArticle({
         prose-pre:my-1
         prose-img:rounded prose-img:my-0.5
         overflow-y-hidden overflow-x-auto
-        max-w-lg
+        max-w-[36rem]
         dark:prose-invert ${className}
       `}
       dangerouslySetInnerHTML={{ __html: html }}

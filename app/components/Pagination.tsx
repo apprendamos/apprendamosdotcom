@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useEffect } from "react";
 import useSWRInfinite from "swr/infinite";
 import { AnimatedButton } from "app/components";
 
@@ -12,14 +11,12 @@ interface Props {
   apiUrl: string;
   Wrapper: React.FunctionComponent<any>;
   Item: React.FunctionComponent<any>;
-  LoadMoreButton: React.FunctionComponent<React.HTMLProps<HTMLButtonElement>>;
 }
 
 const Pagination: React.FunctionComponent<Props> = ({
   apiUrl,
   Wrapper = DafaultWrapper,
   Item,
-  LoadMoreButton,
 }) => {
   const getKey = (pageIndex: any, previousPageData: any) => {
     if (previousPageData && !previousPageData.meta.page.more) return null;
@@ -29,7 +26,7 @@ const Pagination: React.FunctionComponent<Props> = ({
     return `${apiUrl}?cursor=${previousPageData.meta.page.cursor}`;
   };
 
-  const { data, size, error, setSize, isValidating } = useSWRInfinite(getKey, {
+  const { data, size, error, setSize } = useSWRInfinite(getKey, {
     persistSize: true,
   });
 

@@ -1,11 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { xata } from "xata/client";
-import { ArticlesRecord } from "xata";
-import { exists, Page, SelectedPick } from "@xata.io/client";
+import { exists } from "@xata.io/client";
 
-import { getSession } from "next-auth/react";
-import { AuthUserType } from "types";
 
 type Data = any;
 
@@ -14,28 +11,19 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   switch (req.method) {
-    case "POST":
-      const session = await getSession({ req });
-      if (!session || !session.user) {
-        res.status(401).json({ error: "Unauthorized" });
+    case "GET":
+      const { articleId, cursor } = req.query;
+
+      const parent_article = await xata.db.articles.read(articleId as string);
+
+      if (!parent_article) {
+        res.status(404);
         return;
       }
 
-      const profile = (session.user as AuthUserType).profile;
-
-      const created = await xata.db.articles.create({
-        body: req.body.body,
-        author: profile?.id,
-        publication_date: new Date(),
-      });
-      res.status(200).json({ id: created.id });
-
-      break;
-    case "GET":
-      const { cursor } = req.query;
-
       const page = await xata.db.articles
         .filter(exists("author"))
+        .filter("parent", articleId as string)
         .sort("publication_date", "desc")
         .select([
           "id",
@@ -71,6 +59,8 @@ export default async function handler(
         ...page,
         records,
       });
+    
+
     default:
       res.status(404).end();
   }
