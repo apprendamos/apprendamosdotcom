@@ -1,42 +1,26 @@
-export const revalidate = 10;
+"use client";
 
-import { xata } from "xata/client";
-import { exists } from "@xata.io/client";
-import { Profile } from "app/components";
-import { ProfileType } from "types";
+import { Pagination, Profile } from "app/components";
+import { usePathname } from 'next/navigation'
 
-async function getLikers(id: string) {
-  const page = await xata.db.profile_article_rels
-    .filter("article.id", id)
-    .filter("like_status", true)
-    .filter(exists("profile"))
-    .select(["profile.username", "profile.name", "profile.image"])
-    .getPaginated({
-      pagination: {
-        size: 15,
-      },
-    });
-  
-  return page.records.map((rel) => rel.profile) as ProfileType[];
-}
 
-export default async function ArticleLikersPage({
-  params,
-}: {
-  params: { articleId: string };
-}) {
+const Wrapper = ({ children }: { children: any }) => (
+  <div className="flex flex-col space-y-1">{children}</div>
+);
 
-  const likers = await getLikers(params.articleId);
 
-  if (!likers) {
-    return <p className="text-gray-500">Not any likers for now</p>;
+export default function ArticleChildrenPage() {
+  const pathname = usePathname();
+
+  if (!pathname) {
+    return null;
   }
 
   return (
-    <div className="space-y-4">
-      {likers.map((liker) => (
-        <Profile key={liker.username} {...liker} />
-      ))}
-    </div>
+    <Pagination
+      apiUrl={`/api${pathname}`}
+      Item={Profile}
+      Wrapper={Wrapper}
+    />
   );
 }

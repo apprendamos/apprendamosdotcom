@@ -3,7 +3,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { xata } from "xata/client";
 import { exists } from "@xata.io/client";
 
-
 type Data = any;
 
 export default async function handler(
@@ -21,16 +20,11 @@ export default async function handler(
         return;
       }
 
-      const page = await xata.db.comments
-        .filter(exists("author"))
+      const page = await xata.db.profile_article_rels
         .filter("article", articleId as string)
-        .sort("publication_date", "desc")
-        .select([
-          "*",
-          "author.name",
-          "author.username",
-          "author.image"
-        ])
+        .filter("like_status", true)
+        .filter(exists("profile"))
+        .select(["profile.name", "profile.username", "profile.image"])
         .getPaginated({
           pagination: {
             size: 5,
@@ -38,14 +32,21 @@ export default async function handler(
           },
         });
 
+      const records = page.records.map((record) => {
+        return {
+          ...record.profile,
+        };
+      });
 
       if (!page) {
         res.status(404).json({ error: "Page not found" });
         return;
       }
 
-      res.status(200).json(page);
-    
+      res.status(200).json({
+        ...page,
+        records,
+      });
 
     default:
       res.status(404).end();

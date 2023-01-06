@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ProfileType } from "types";
-import { randomIntFromInterval } from "utils";
 
 export default function Profile({
   name,
