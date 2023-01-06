@@ -1,13 +1,12 @@
 "use client";
 
 import { Pagination, Profile } from "app/components";
-import { usePathname } from 'next/navigation'
-
+import { usePathname } from "next/navigation";
+import SharedLayout from '../SharedLayout';
 
 const Wrapper = ({ children }: { children: any }) => (
   <div className="flex flex-col space-y-1">{children}</div>
 );
-
 
 export default function ArticleChildrenPage() {
   const pathname = usePathname();
@@ -17,10 +16,8 @@ export default function ArticleChildrenPage() {
   }
 
   return (
-    <Pagination
-      apiUrl={`/api${pathname}`}
-      Item={Profile}
-      Wrapper={Wrapper}
-    />
+    <SharedLayout title="Likes">
+      <Pagination apiUrl={`/api${pathname}`} Item={Profile} Wrapper={Wrapper} />
+    </SharedLayout>
   );
 }

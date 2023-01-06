@@ -3,8 +3,11 @@ export const revalidate = 10;
 import { notFound } from "next/navigation";
 import { ProfileType } from "types";
 import { xata } from "xata/client";
-import { MarkdownArticle, Profile } from "app/components";
-import ArticleNavbar from "./ArticleNavbar";
+import {
+  MarkdownArticle,
+  Profile,
+  ArticleReactionButtons,
+} from "app/components";
 
 async function getArticle(id: string) {
   const record = await xata.db.articles.read(id);
@@ -44,7 +47,7 @@ export default async function SingleArticlePage({
       <MarkdownArticle className="pl-4 pr-2">
         {article?.body as string}
       </MarkdownArticle>
-      <ArticleNavbar articleId={params.articleId} />
+      <ArticleReactionButtons articleId={article.id} />
       {children}
     </>
   );

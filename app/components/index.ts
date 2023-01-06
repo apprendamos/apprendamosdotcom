@@ -21,7 +21,7 @@ import PageBackButton from "./PageBackButton";
 
 import PaginationArticles from "./PaginationArticles";
 
-import ArticleActions from "./ArticleActions";
+import ArticleReactionButtons from "./ArticleReactionButtons";
 
 import AuthButton from "./AuthButton";
 
@@ -47,7 +47,7 @@ export {
   AppBottomBar,
   PageBackButton,
   PaginationArticles,
-  ArticleActions,
+  ArticleReactionButtons,
   AuthButton,
   Pagination,
   AnimatedButton,

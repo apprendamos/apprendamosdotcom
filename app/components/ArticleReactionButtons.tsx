@@ -12,7 +12,7 @@ import {
   StarIcon,
 } from "@radix-ui/react-icons";
 
-export default function ArticleActions({ articleId }: { articleId: string }) {
+export default function ArticleReactionButtons({ articleId }: { articleId: string }) {
   const {
     data: stats_data,
     error: stats_error,
@@ -49,18 +49,26 @@ export default function ArticleActions({ articleId }: { articleId: string }) {
       <ReactionButton
         Icon={ResetIcon}
         label={isLoadingStats ? 0 : children_count}
+        pathname={`/articles/${articleId}/children`}
       />
       <ReactionButton
         color="red"
         active={isLoadingReactions ? false : reactions_data?.like_status}
         Icon={HeartIcon}
         label={isLoadingStats ? 0 : like_count}
+        pathname={`/articles/${articleId}/likes`}
         onClick={handleLike}
       />
-      <ReactionButton Icon={StarIcon} label={isLoadingStats ? 0 : star_count} />
+      <ReactionButton
+        Icon={StarIcon}
+        label={isLoadingStats ? 0 : star_count}
+        pathname={`/articles/${articleId}/stars`}
+      />
+
       <ReactionButton
         Icon={ChatBubbleIcon}
         label={isLoadingStats ? 0 : comment_count}
+        pathname={`/articles/${articleId}/comments`}
       />
     </div>
   );

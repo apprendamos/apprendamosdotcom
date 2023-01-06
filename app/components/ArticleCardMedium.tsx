@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { ArticleActions, MarkdownArticle } from "app/components";
+import { ArticleReactionButtons, MarkdownArticle } from "app/components";
 import Link from "next/link";
 import { ArticleType } from "types";
 
@@ -65,7 +65,7 @@ export default function ArticleCardMedium({
           </Link>
         </div>
       </div>
-      <ArticleActions articleId={id} />
+      <ArticleReactionButtons articleId={id} />
     </div>
   );
 }

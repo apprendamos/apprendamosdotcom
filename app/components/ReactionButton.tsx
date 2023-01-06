@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { usePrevious } from "app/hooks";
 
@@ -8,12 +9,14 @@ export default function ReactionButton({
   active,
   Icon,
   label,
-  onClick,
+  pathname,
+  onClick = () => {},
 }: {
   color?: string;
   active?: boolean;
   Icon: React.ForwardRefExoticComponent<any>;
   label?: number;
+  pathname: string;
   onClick?: () => void;
 }) {
   const spanRef = useRef<HTMLSpanElement>(null);
@@ -49,15 +52,18 @@ export default function ReactionButton({
   });
 
   return (
-    <button
-      onClick={onClick}
+    <div
       className={
         "flex flex-none items-center space-x-1 text-xs " +
         (active ? "text-red-800" : "text-zinc-600")
       }
     >
-      <Icon className="w-4 h-4" />
-      <span ref={spanRef} />
-    </button>
+      <button onClick={onClick}>
+        <Icon className="w-4 h-4" />
+      </button>
+      <Link href={pathname}>
+        <span ref={spanRef} />
+      </Link>
+    </div>
   );
 }
