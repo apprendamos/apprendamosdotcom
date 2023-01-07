@@ -1,4 +1,4 @@
-export const revalidate = 10;
+export const revalidate = 60;
 
 import { notFound } from "next/navigation";
 import { ProfileType } from "types";

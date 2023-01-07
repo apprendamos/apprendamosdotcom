@@ -1,4 +1,4 @@
-export const revalidate = 10;
+export const revalidate = 60;
 
 import { exists } from "@xata.io/client";
 import { xata } from "xata/client";
