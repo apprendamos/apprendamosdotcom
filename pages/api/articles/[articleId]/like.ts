@@ -40,27 +40,44 @@ export default async function handler(
         .select(["*"])
         .getFirst();
 
+      let updated_rel, updated_article;
+
       if (actual_rel) {
-        await xata.db.profile_article_rels.update(actual_rel.id, {
+        updated_rel = await xata.db.profile_article_rels.update(actual_rel.id, {
           like_status: !actual_rel.like_status,
         });
 
-        article.update({
+        updated_article = await article.update({
           like_count: article.like_count + (!actual_rel.like_status ? 1 : -1),
         });
       } else {
-        await xata.db.profile_article_rels.create({
+        updated_rel = await xata.db.profile_article_rels.create({
           article: articleId as string,
           profile: profile?.id,
           like_status: true,
         });
 
-        article.update({
+        updated_article = await article.update({
           like_count: article.like_count + 1,
         });
       }
 
-      res.status(200);
+      const stats = {
+        global: {
+          like_count: updated_article?.like_count,
+          comment_count: updated_article?.comment_count,
+          star_count: updated_article?.star_count,
+          children_count: updated_article?.children_count,
+        },
+        session: {
+          like_status: updated_rel?.like_status,
+          star_count: updated_rel?.star_count,
+          comment_count: updated_rel?.comment_count,
+          children_count: updated_rel?.children_count,
+        },
+      };
+
+      res.status(200).json(stats);
 
       break;
     default:

@@ -10,6 +10,7 @@ export default function ReactionButton({
   Icon,
   label,
   pathname,
+  disabled,
   onClick = () => {},
 }: {
   color?: string;
@@ -17,53 +18,89 @@ export default function ReactionButton({
   Icon: React.ForwardRefExoticComponent<any>;
   label?: number;
   pathname: string;
+  disabled?: boolean;
   onClick?: () => void;
 }) {
-  const spanRef = useRef<HTMLSpanElement>(null);
+  const lastValue = useRef(0);
+  const lastActive = useRef(false);
 
-  const prevLabel = usePrevious(label);
+  const spanRef = useRef<HTMLAnchorElement>(null);
+  const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (prevLabel === label) return;
-    if (label !== prevLabel) {
-      const span = spanRef.current;
-      if (!span) return;
+    const span = spanRef.current;
+    if (!span) return;
 
-      span.textContent = prevLabel?.toString() || "0";
+    if (label !== lastValue.current && label !== undefined) {
+      const translate =
+        label < lastValue.current ? "translate-y-2" : "-translate-y-2";
+
       span.classList.add(
         "transition",
         "ease-in-out",
-        "-translate-y-1",
         "opacity-0",
+        translate,
         "duration-500"
       );
 
       setTimeout(() => {
-        span.textContent = label?.toString() || "0";
+        span.textContent = label.toString();
         span.classList.remove(
           "transition",
           "ease-in-out",
-          "-translate-y-1",
           "opacity-0",
+          translate,
           "duration-500"
         );
       }, 500);
+
+      lastValue.current = label;
     }
-  });
+  }, [label]);
+
+  useEffect(() => {
+    const div = divRef.current;
+    if (!div) return;
+
+    if (active !== lastActive.current && active !== undefined) {
+      if (active) {
+        div.classList.remove(
+          "transition",
+          "ease-in-out",
+          "text-zinc-500",
+          "duration-500"
+        );
+        div.classList.add(
+          "transition",
+          "ease-in-out",
+          "text-red-500",
+          "duration-500"
+        );
+      } else {
+        div.classList.remove(
+          "transition",
+          "ease-in-out",
+          "text-red-500",
+          "duration-500"
+        );
+        div.classList.add(
+          "transition",
+          "ease-in-out",
+          "text-zinc-500",
+          "duration-500"
+        );
+      }
+
+      lastActive.current = active;
+    }
+  }, [active]);
 
   return (
-    <div
-      className={
-        "flex flex-none items-center space-x-1 text-xs " +
-        (active ? "text-red-800" : "text-zinc-600")
-      }
-    >
-      <button onClick={onClick}>
+    <div ref={divRef} className="flex flex-none items-center space-x-1 text-xs text-zinc-500">
+      <button disabled={disabled} onClick={onClick}>
         <Icon className="w-4 h-4" />
       </button>
-      <Link href={pathname}>
-        <span ref={spanRef} />
-      </Link>
+      <Link href={pathname} ref={spanRef} />
     </div>
   );
 }

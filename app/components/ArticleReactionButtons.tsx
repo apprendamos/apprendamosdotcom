@@ -1,5 +1,6 @@
 "use client";
 
+import {useState} from "react";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 
@@ -11,63 +12,88 @@ import {
   HeartIcon,
   StarIcon,
 } from "@radix-ui/react-icons";
+import { StatsType } from "types";
 
-export default function ArticleReactionButtons({ articleId }: { articleId: string }) {
+export default function ArticleReactionButtons({
+  articleId,
+}: {
+  articleId: string;
+}) {
+  const { status } = useSession();
+  const isLoadingAuth = status === "loading";
+
   const {
     data: stats_data,
     error: stats_error,
     mutate: stats_mutate,
-  } = useSWR(`/api/articles/${articleId}`);
+  } = useSWR(!isLoadingAuth ? `/api/articles/${articleId}/stats` : null);
 
-  const { children_count, comment_count, like_count, star_count } =
-    stats_data || {};
-
-  const { status } = useSession();
-  const isAuthenticated = status === "authenticated";
-
-  const {
-    data: reactions_data,
-    error: reactions_error,
-    mutate: reactions_mutate,
-  } = useSWR(isAuthenticated ? `/api/articles/${articleId}/reactions` : null);
+  const { global, session } = stats_data || {};
 
   const isLoadingStats = !stats_data && !stats_error;
-  const isLoadingReactions = !reactions_data && !reactions_error;
+
+  const [loadingLike, setLoadingLike] = useState(false);
 
   const handleLike = async () => {
-    const res = await fetch(`/api/articles/${articleId}/like`, {
-      method: "POST",
-    });
-    if (res.ok) {
-      stats_mutate();
-      reactions_mutate();
-    }
+    stats_mutate(
+      async () => {
+        setLoadingLike(true);
+        
+        const res = await fetch(`/api/articles/${articleId}/like`, {
+          method: "POST",
+        });
+
+        const data = await res.json();
+
+        setTimeout(() => {
+          setLoadingLike(false);
+        }, 3000);
+
+        return data;
+      },
+      {
+        optimisticData: (stats_data: StatsType) => ({
+          global: {
+            ...stats_data.global,
+            like_count:
+              stats_data.global.like_count +
+              (!stats_data?.session?.like_status ? 1 : -1),
+          },
+          session: {
+            ...stats_data.session,
+            like_status: !stats_data?.session?.like_status,
+          },
+        }),
+        revalidate: false,
+      }
+    );
   };
 
   return (
     <div className="grid grid-cols-4 gap-8 px-10">
       <ReactionButton
         Icon={ResetIcon}
-        label={isLoadingStats ? 0 : children_count}
+        label={global?.children_count}
         pathname={`/articles/${articleId}/children`}
       />
       <ReactionButton
         color="red"
-        active={isLoadingReactions ? false : reactions_data?.like_status}
+        active={session?.like_status}
         Icon={HeartIcon}
-        label={isLoadingStats ? 0 : like_count}
+        label={global?.like_count}
         pathname={`/articles/${articleId}/likes`}
+        disabled={loadingLike}
         onClick={handleLike}
       />
       <ReactionButton
         Icon={StarIcon}
-        label={isLoadingStats ? 0 : star_count}
+        label={global?.star_count}
         pathname={`/articles/${articleId}/stars`}
       />
 
       <ReactionButton
         Icon={ChatBubbleIcon}
-        label={isLoadingStats ? 0 : comment_count}
+        label={global?.comment_count}
         pathname={`/articles/${articleId}/comments`}
       />
     </div>

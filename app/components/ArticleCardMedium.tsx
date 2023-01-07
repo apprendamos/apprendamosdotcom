@@ -25,8 +25,8 @@ export default function ArticleCardMedium({
       className="
         p-2
         border-y border-red-600/10
-        dark:focus-within:border-red-600/30
-        bg-zinc-100 dark:bg-zinc-900 bg-opacity-50
+        focus-within:border-red-600/30
+        bg-zinc-900 bg-opacity-50
       "
     >
       <div className="flex">
