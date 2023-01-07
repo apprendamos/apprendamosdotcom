@@ -17,7 +17,7 @@ export default function ProfileCard({
           p-4
           items-center         
           rounded 
-          border dark:border-red-600/10
+          border border-red-600/10
         "
       >
         <Image

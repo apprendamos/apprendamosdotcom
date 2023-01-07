@@ -21,6 +21,7 @@ export default function ArticleReactionButtons({
 }) {
   const { status } = useSession();
   const isLoadingAuth = status === "loading";
+  const isUnauthenticated = status === "unauthenticated";
 
   const {
     data: stats_data,
@@ -82,7 +83,7 @@ export default function ArticleReactionButtons({
         Icon={HeartIcon}
         label={global?.like_count}
         pathname={`/articles/${articleId}/likes`}
-        disabled={loadingLike}
+        disabled={isUnauthenticated || loadingLike}
         onClick={handleLike}
       />
       <ReactionButton

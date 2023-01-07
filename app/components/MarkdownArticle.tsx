@@ -14,14 +14,14 @@ export default function MarkdownArticle({
   return (
     <article
       className={`
-        prose prose-zinc
+        prose prose-invert
         prose-headings:my-1
         prose-p:my-0.5
         prose-pre:my-1
         prose-img:rounded prose-img:my-0.5
         overflow-y-hidden overflow-x-auto
         max-w-[36rem]
-        dark:prose-invert ${className}
+        ${className}
       `}
       dangerouslySetInnerHTML={{ __html: html }}
     />

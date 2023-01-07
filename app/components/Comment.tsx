@@ -8,7 +8,7 @@ export default function Comment({ id, body, like_count, author }: CommentType) {
   };
 
   return (
-    <div className="rounded dark:bg-zinc-600 p-2 select-none">
+    <div className="rounded bg-zinc-600 p-2 select-none">
       <Profile {...(profile as ProfileType)} />
       <p>{body}</p>
     </div>
