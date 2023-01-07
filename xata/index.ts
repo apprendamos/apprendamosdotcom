@@ -27,6 +27,8 @@ const tables = [
         defaultValue: "0",
       },
       { name: "image", type: "string" },
+      { name: "like_count", type: "int", notNull: true, defaultValue: "0" },
+      { name: "article_count", type: "int", notNull: true, defaultValue: "0" },
     ],
   },
   {
@@ -106,7 +108,7 @@ const tables = [
     ],
   },
   {
-    name: "follower_followee_rels",
+    name: "profile_rels",
     columns: [
       { name: "follower", type: "link", link: { table: "profiles" } },
       { name: "followee", type: "link", link: { table: "profiles" } },
@@ -116,6 +118,7 @@ const tables = [
         notNull: true,
         defaultValue: "2022-12-20T01:11:01.001Z",
       },
+      { name: "following_status", type: "bool" },
     ],
   },
   {
@@ -169,8 +172,8 @@ export type AccountsRecord = Accounts & XataRecord;
 export type Comments = InferredTypes["comments"];
 export type CommentsRecord = Comments & XataRecord;
 
-export type FollowerFolloweeRels = InferredTypes["follower_followee_rels"];
-export type FollowerFolloweeRelsRecord = FollowerFolloweeRels & XataRecord;
+export type ProfileRels = InferredTypes["profile_rels"];
+export type ProfileRelsRecord = ProfileRels & XataRecord;
 
 export type SponsorQuestionRels = InferredTypes["sponsor_question_rels"];
 export type SponsorQuestionRelsRecord = SponsorQuestionRels & XataRecord;
@@ -187,7 +190,7 @@ export type DatabaseSchema = {
   profile_article_rels: ProfileArticleRelsRecord;
   accounts: AccountsRecord;
   comments: CommentsRecord;
-  follower_followee_rels: FollowerFolloweeRelsRecord;
+  profile_rels: ProfileRelsRecord;
   sponsor_question_rels: SponsorQuestionRelsRecord;
   users: UsersRecord;
   sessions: SessionsRecord;

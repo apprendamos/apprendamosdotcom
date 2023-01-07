@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { xata } from "xata/client";
-import { ArticlesRecord } from "xata";
-import { exists, Page, SelectedPick } from "@xata.io/client";
+import { exists } from "@xata.io/client";
 
 import { getSession } from "next-auth/react";
 import { AuthUserType } from "types";

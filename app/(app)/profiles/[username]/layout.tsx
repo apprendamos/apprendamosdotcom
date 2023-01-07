@@ -6,6 +6,7 @@ import { xata } from "xata/client";
 
 import { randomIntFromInterval } from "utils";
 import ProfileNavbar from "./ProfileNavbar";
+import { AnimatedButton } from "app/components";
 
 async function getProfile(username: string) {
   const record = await xata.db.profiles.filter("username", username).getFirst();
@@ -41,6 +42,8 @@ export default async function SingleProfileLayout({
       />
       <h1 className="text-center text-xl">{profile.name}</h1>
       <h1 className="text-center text-zinc-500">@{profile.username}</h1>
+
+      <AnimatedButton size="small">Follow</AnimatedButton>
       <ProfileNavbar username={params.username} />
       {children}
     </div>
