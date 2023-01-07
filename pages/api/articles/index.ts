@@ -43,6 +43,7 @@ export default async function handler(
           "publication_date",
           "author.username",
           "author.name",
+          "author.image",
           "like_count",
           "comment_count",
           "children_count",

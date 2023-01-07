@@ -31,7 +31,10 @@ export default async function SingleProfileLayout({
     <div>
       <Image
         alt={`${profile.username} profile picture`}
-        src={`https://xsgames.co/randomusers/assets/avatars/pixel/${rndInt}.jpg`}
+        src={
+          profile.image ||
+          "https://xsgames.co/randomusers/assets/avatars/pixel/${rndInt}.jpg"
+        }
         width={250}
         height={250}
         className="mx-auto rounded-full border mb-2"
