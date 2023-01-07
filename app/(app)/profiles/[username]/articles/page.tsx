@@ -23,7 +23,10 @@ async function getArticles(username: string) {
 
   const page = await JSON.parse(JSON.stringify(data));
 
-  return page.records as ArticleType[];
+  return page.records.map((record: ArticleType) => ({
+    ...record,
+    body: record.body.slice(0, 280),
+  }));
 }
 
 export default async function ProfileArticlesPage({
@@ -36,7 +39,7 @@ export default async function ProfileArticlesPage({
 
   return (
     <div className="space-y-4">
-      {articles.map((article) => (
+      {articles.map((article: ArticleType) => (
         <ArticleCardSmall
           key={article.id}
           {...article}

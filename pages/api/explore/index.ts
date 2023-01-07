@@ -11,7 +11,7 @@ export default async function handler(
     case "GET":
       const queryString = req.query.q as string;
 
-      const records = await xata.search.byTable(queryString, {
+      let records = await xata.search.byTable(queryString, {
         tables: [
           {
             table: "articles",
@@ -42,6 +42,16 @@ export default async function handler(
         fuzziness: 0,
         prefix: "phrase",
       });
+
+      records = {
+        ...records,
+        articles: records.articles?.map((record) => {
+          return {
+            ...record,
+            body: record.body.slice(0, 280),
+          };
+        })
+      }
 
       res.status(200).json(records);
 
