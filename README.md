@@ -2,7 +2,7 @@
 
 Apprendamos is a social networking platform where people can share articles and interact with others. 
 
-This version works with Next.js 13 latest features and all the data is stored in the server of Xata.
+This version works with Next.js 13 latest features and all the data is stored in the servers of Xata.
 
 ## Tech Stack:
     - TypeScript
