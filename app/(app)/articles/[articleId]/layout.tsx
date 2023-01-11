@@ -37,6 +37,7 @@ export default async function SingleArticlePage({
   const profile = (author || {
     name: "Unknown",
     username: "not_found",
+    image: "/unknown_profile.jpg"
   }) as ProfileType;
 
   return (

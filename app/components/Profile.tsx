@@ -13,7 +13,7 @@ export default function Profile({
       <div className="flex items-center">
         <Image
           alt={`${username} profile picture`}
-          src={image}
+          src={image || "/unknown_profile.jpg"}
           width={50}
           height={50}
           className="rounded-full border"
