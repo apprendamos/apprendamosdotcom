@@ -15,7 +15,7 @@ export default function ArticleCardMedium({
   const profile = author || {
     name: "Unknown",
     username: "not_found",
-    image: "https://xsgames.co/randomusers/assets/avatars/pixel/1.jpg",
+    image: "/unknown_profile.jpg",
   };
 
   const { name, username, image } = profile;
@@ -34,10 +34,7 @@ export default function ArticleCardMedium({
           <Link href={`/profiles/${username}`}>
             <Image
               alt={`${username} profile picture`}
-              src={
-                image ||
-                "https://xsgames.co/randomusers/assets/avatars/pixel/1.jpg"
-              }
+              src={image || "/unknown_profile.jpg"}
               width={36}
               height={36}
               className="rounded-full border"
