@@ -8,7 +8,7 @@ import type {
 
 const tables = [
   {
-    name: "profiles",
+    name: "Profile",
     columns: [
       { name: "username", type: "string", unique: true },
       {
@@ -32,10 +32,10 @@ const tables = [
     ],
   },
   {
-    name: "articles",
+    name: "Article",
     columns: [
       { name: "hashtags", type: "multiple" },
-      { name: "author", type: "link", link: { table: "profiles" } },
+      { name: "author", type: "link", link: { table: "Profile" } },
       {
         name: "body",
         type: "text",
@@ -53,7 +53,7 @@ const tables = [
       { name: "bookmark_count", type: "int", notNull: true, defaultValue: "0" },
       { name: "children_count", type: "int", notNull: true, defaultValue: "0" },
       { name: "comment_count", type: "int", notNull: true, defaultValue: "0" },
-      { name: "parent", type: "link", link: { table: "articles" } },
+      { name: "parent", type: "link", link: { table: "Article" } },
       {
         name: "is_question",
         type: "bool",
@@ -63,18 +63,18 @@ const tables = [
     ],
   },
   {
-    name: "profile_article_rels",
+    name: "ProfileArticle",
     columns: [
-      { name: "article", type: "link", link: { table: "articles" } },
+      { name: "article", type: "link", link: { table: "Article" } },
       { name: "like_status", type: "bool", defaultValue: "false" },
-      { name: "profile", type: "link", link: { table: "profiles" } },
+      { name: "profile", type: "link", link: { table: "Profile" } },
       { name: "comment_count", type: "int", notNull: true, defaultValue: "0" },
       { name: "children_count", type: "int", notNull: true, defaultValue: "0" },
       { name: "star_count", type: "int", notNull: true, defaultValue: "0" },
     ],
   },
   {
-    name: "accounts",
+    name: "Account",
     columns: [
       { name: "type", type: "string" },
       { name: "provider", type: "string" },
@@ -85,7 +85,7 @@ const tables = [
       { name: "session_state", type: "string" },
       { name: "oauth_token_secret", type: "string" },
       { name: "oauth_token", type: "string" },
-      { name: "user", type: "link", link: { table: "users" } },
+      { name: "user", type: "link", link: { table: "User" } },
       { name: "providerAccountId", type: "string", unique: true },
       { name: "refresh_token", type: "string" },
       { name: "expires_at", type: "int" },
@@ -93,7 +93,7 @@ const tables = [
     ],
   },
   {
-    name: "comments",
+    name: "Comment",
     columns: [
       { name: "like_count", type: "int", notNull: true, defaultValue: "0" },
       { name: "body", type: "string", notNull: true, defaultValue: "sasd" },
@@ -103,15 +103,15 @@ const tables = [
         notNull: true,
         defaultValue: "2022-11-17T00:00:00Z",
       },
-      { name: "author", type: "link", link: { table: "profiles" } },
-      { name: "article", type: "link", link: { table: "articles" } },
+      { name: "author", type: "link", link: { table: "Profile" } },
+      { name: "article", type: "link", link: { table: "Article" } },
     ],
   },
   {
-    name: "profile_rels",
+    name: "FollowerFollowee",
     columns: [
-      { name: "follower", type: "link", link: { table: "profiles" } },
-      { name: "followee", type: "link", link: { table: "profiles" } },
+      { name: "follower", type: "link", link: { table: "Profile" } },
+      { name: "followee", type: "link", link: { table: "Profile" } },
       {
         name: "creation_date",
         type: "datetime",
@@ -122,21 +122,21 @@ const tables = [
     ],
   },
   {
-    name: "sponsor_question_rels",
+    name: "Cheer",
     columns: [
-      { name: "sponsor", type: "link", link: { table: "profiles" } },
-      { name: "question", type: "link", link: { table: "articles" } },
+      { name: "sponsor", type: "link", link: { table: "Profile" } },
+      { name: "article", type: "link", link: { table: "Article" } },
       { name: "message", type: "string" },
     ],
   },
   {
-    name: "users",
+    name: "User",
     columns: [
       { name: "email", type: "email", unique: true },
       {
         name: "profile",
         type: "link",
-        link: { table: "profiles" },
+        link: { table: "Profile" },
         unique: true,
       },
       { name: "blocked_status", type: "bool", defaultValue: "false" },
@@ -144,9 +144,9 @@ const tables = [
     ],
   },
   {
-    name: "sessions",
+    name: "Session",
     columns: [
-      { name: "user", type: "link", link: { table: "users" } },
+      { name: "user", type: "link", link: { table: "User" } },
       { name: "expires", type: "datetime" },
       { name: "sessionToken", type: "string" },
       { name: "userId", type: "string" },
@@ -157,43 +157,43 @@ const tables = [
 export type SchemaTables = typeof tables;
 export type InferredTypes = SchemaInference<SchemaTables>;
 
-export type Profiles = InferredTypes["profiles"];
-export type ProfilesRecord = Profiles & XataRecord;
+export type Profile = InferredTypes["Profile"];
+export type ProfileRecord = Profile & XataRecord;
 
-export type Articles = InferredTypes["articles"];
-export type ArticlesRecord = Articles & XataRecord;
+export type Article = InferredTypes["Article"];
+export type ArticleRecord = Article & XataRecord;
 
-export type ProfileArticleRels = InferredTypes["profile_article_rels"];
-export type ProfileArticleRelsRecord = ProfileArticleRels & XataRecord;
+export type ProfileArticle = InferredTypes["ProfileArticle"];
+export type ProfileArticleRecord = ProfileArticle & XataRecord;
 
-export type Accounts = InferredTypes["accounts"];
-export type AccountsRecord = Accounts & XataRecord;
+export type Account = InferredTypes["Account"];
+export type AccountRecord = Account & XataRecord;
 
-export type Comments = InferredTypes["comments"];
-export type CommentsRecord = Comments & XataRecord;
+export type Comment = InferredTypes["Comment"];
+export type CommentRecord = Comment & XataRecord;
 
-export type ProfileRels = InferredTypes["profile_rels"];
-export type ProfileRelsRecord = ProfileRels & XataRecord;
+export type FollowerFollowee = InferredTypes["FollowerFollowee"];
+export type FollowerFolloweeRecord = FollowerFollowee & XataRecord;
 
-export type SponsorQuestionRels = InferredTypes["sponsor_question_rels"];
-export type SponsorQuestionRelsRecord = SponsorQuestionRels & XataRecord;
+export type Cheer = InferredTypes["Cheer"];
+export type CheerRecord = Cheer & XataRecord;
 
-export type Users = InferredTypes["users"];
-export type UsersRecord = Users & XataRecord;
+export type User = InferredTypes["User"];
+export type UserRecord = User & XataRecord;
 
-export type Sessions = InferredTypes["sessions"];
-export type SessionsRecord = Sessions & XataRecord;
+export type Session = InferredTypes["Session"];
+export type SessionRecord = Session & XataRecord;
 
 export type DatabaseSchema = {
-  profiles: ProfilesRecord;
-  articles: ArticlesRecord;
-  profile_article_rels: ProfileArticleRelsRecord;
-  accounts: AccountsRecord;
-  comments: CommentsRecord;
-  profile_rels: ProfileRelsRecord;
-  sponsor_question_rels: SponsorQuestionRelsRecord;
-  users: UsersRecord;
-  sessions: SessionsRecord;
+  Profile: ProfileRecord;
+  Article: ArticleRecord;
+  ProfileArticle: ProfileArticleRecord;
+  Account: AccountRecord;
+  Comment: CommentRecord;
+  FollowerFollowee: FollowerFolloweeRecord;
+  Cheer: CheerRecord;
+  User: UserRecord;
+  Session: SessionRecord;
 };
 
 const DatabaseClient = buildClient();

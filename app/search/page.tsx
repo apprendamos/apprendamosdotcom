@@ -24,7 +24,7 @@ export default function SearchPage() {
         </div>
       );
 
-    if (!data.articles && !data.profiles) {
+    if (!data.Article && !data.Profile) {
       return (
         <div className="px-4 italic">
           <h1>No results found for {q}</h1>
@@ -34,21 +34,21 @@ export default function SearchPage() {
 
     return (
       <div className="flex flex-col space-y-4 px-4">
-        {data && data.articles && data.articles.length > 0 && (
+        {data && data.Article && data.Article.length > 0 && (
           <div>
             <h1 className="font-bold mb-2">Articles</h1>
             <div className="flex flex-col space-y-4">
-              {data.articles.map((article: ArticleType) => (
+              {data.Article.map((article: ArticleType) => (
                 <ArticleCardSmall key={article.id} {...article} />
               ))}
             </div>
           </div>
         )}
-        {data && data.profiles && data.profiles.length > 0 && (
+        {data && data.Profile && data.Profile.length > 0 && (
           <div>
             <h1 className="font-bold mb-2">Users</h1>
             <div className="flex flex-col space-y-4">
-              {data.profiles.map((profile: ProfileType) => (
+              {data.Profile.map((profile: ProfileType) => (
                 <ProfileCard key={profile.username} {...profile} />
               ))}
             </div>

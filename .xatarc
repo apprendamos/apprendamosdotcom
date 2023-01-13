@@ -1,6 +1,6 @@
 {
-  "databaseURL": "https://anthony-cueva-s-workspace-iae285.us-east-1.xata.sh/db/apprendamos",
+  "databaseURL": "https://Apprendamos-Workspace-iae285.us-east-1.xata.sh/db/Payments",
   "codegen": {
-    "output": "xata/index.ts"
+    "output": "xata/dbs/payments.ts"
   }
 }

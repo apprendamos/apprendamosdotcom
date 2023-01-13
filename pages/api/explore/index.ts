@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { xata } from "xata/client";
+import { ApprendamosXataClient } from "xata/clients";
 
 type Data = any;
 
@@ -11,10 +11,10 @@ export default async function handler(
     case "GET":
       const queryString = req.query.q as string;
 
-      let records = await xata.search.byTable(queryString, {
+      let records = await ApprendamosXataClient.search.byTable(queryString, {
         tables: [
           {
-            table: "articles",
+            table: "Article",
             target: [{ column: "hashtags" }, { column: "body" }],
             boosters: [
               {
@@ -28,7 +28,7 @@ export default async function handler(
             ],
           },
           {
-            table: "profiles",
+            table: "Profile",
             target: [
               { column: "username" },
               { column: "name" },
@@ -45,7 +45,7 @@ export default async function handler(
 
       records = {
         ...records,
-        articles: records.articles?.map((record) => {
+        Article: records.Article?.map((record) => {
           return {
             ...record,
             body: record.body.slice(0, 280),

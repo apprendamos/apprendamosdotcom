@@ -1,18 +1,18 @@
 import type { Adapter } from "next-auth/adapters";
-import { xata } from "xata/client";
+import { ApprendamosXataClient } from "xata/clients";
 
 export function XataAdapter(): Adapter {
   return {
     async createUser(user): Promise<any> {
       console.log("createUser", user);
-      const existing = await xata.db.users
+      const existing = await ApprendamosXataClient.db.User
         .filter("email", user.email)
         .select(["*"])
         .getAll();
 
       if (existing && existing[0]) return existing[0];
 
-      const result = await xata.db.users.create({
+      const result = await ApprendamosXataClient.db.User.create({
         email: user.email,
         emailVerified: new Date(),
       });
@@ -26,12 +26,12 @@ export function XataAdapter(): Adapter {
 
     async getUser(id): Promise<any> {
       console.log("getUser", id);
-      return await xata.db.users.read(id);
+      return await ApprendamosXataClient.db.User.read(id);
     },
 
     async getUserByEmail(email): Promise<any> {
       console.log("getUserByEmail", email);
-      const users = await xata.db.users
+      const users = await ApprendamosXataClient.db.User
         .filter("email", email)
         .select(["*"])
         .getAll();
@@ -45,7 +45,7 @@ export function XataAdapter(): Adapter {
 
     async getUserByAccount({ providerAccountId, provider }): Promise<any> {
       console.log("getUserByAccount", providerAccountId, provider);
-      const accounts = await xata.db.accounts
+      const accounts = await ApprendamosXataClient.db.Account
         .filter("providerAccountId", providerAccountId)
         .filter("provider", provider)
         .select(["*", "user.*", "user.profile.*"])
@@ -58,12 +58,12 @@ export function XataAdapter(): Adapter {
 
     async updateUser(updatedUser): Promise<any> {
       console.log("updateUser", updatedUser);
-      return await xata.db.users.update(updatedUser.id as string, updatedUser);
+      return await ApprendamosXataClient.db.User.update(updatedUser.id as string, updatedUser);
     },
 
     async linkAccount(account): Promise<any> {
       console.log("linkAccount", account);
-      return await xata.db.accounts.create({
+      return await ApprendamosXataClient.db.Account.create({
         ...account,
         user: account.userId,
       });
@@ -71,7 +71,7 @@ export function XataAdapter(): Adapter {
 
     async createSession(session): Promise<any> {
       console.log("createSession", session);
-      return await xata.db.sessions.create({
+      return await ApprendamosXataClient.db.Session.create({
         ...session,
         user: session.userId,
       });
@@ -79,7 +79,7 @@ export function XataAdapter(): Adapter {
 
     async getSessionAndUser(sessionToken): Promise<any> {
       console.log("getSessionAndUser", sessionToken);
-      const records = await xata.db.sessions
+      const records = await ApprendamosXataClient.db.Session
         .filter("sessionToken", sessionToken)
         .select(["*", "user.*", "user.profile.*"])
         .getAll();
@@ -108,7 +108,7 @@ export function XataAdapter(): Adapter {
 
     async updateSession(session): Promise<any> {
       console.log("updateSession", session);
-      const records = await xata.db.sessions
+      const records = await ApprendamosXataClient.db.Session
         .filter("sessionToken", session.sessionToken)
         .select(["*"])
         .getAll();
@@ -117,12 +117,12 @@ export function XataAdapter(): Adapter {
 
       const existing = records[0];
 
-      return await xata.db.sessions.update(existing.id as string, session);
+      return await ApprendamosXataClient.db.Session.update(existing.id as string, session);
     },
 
     async deleteSession(sessionToken): Promise<any> {
       console.log("deleteSession", sessionToken);
-      const records = await xata.db.sessions
+      const records = await ApprendamosXataClient.db.Session
         .filter("sessionToken", sessionToken)
         .select(["*"])
         .getAll();
@@ -131,7 +131,7 @@ export function XataAdapter(): Adapter {
 
       const existing = records[0];
 
-      await xata.db.sessions.delete(existing.id as string);
+      await ApprendamosXataClient.db.Session.delete(existing.id as string);
       return sessionToken;
     },
   };

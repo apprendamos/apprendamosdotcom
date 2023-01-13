@@ -2,14 +2,14 @@ export const revalidate = 60;
 
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { xata } from "xata/client";
+import { ApprendamosXataClient } from "xata/clients";
 
 import { randomIntFromInterval } from "utils";
 import ProfileNavbar from "./ProfileNavbar";
-import { AnimatedButton } from "app/components";
+import { AnimatedButton, FollowButton } from "app/components";
 
 async function getProfile(username: string) {
-  const record = await xata.db.profiles.filter("username", username).getFirst();
+  const record = await ApprendamosXataClient.db.Profile.filter("username", username).getFirst();
   return record;
 }
 
@@ -26,8 +26,6 @@ export default async function SingleProfileLayout({
     return notFound();
   }
 
-  const rndInt = randomIntFromInterval(1, 50);
-
   return (
     <div>
       <Image
@@ -39,8 +37,9 @@ export default async function SingleProfileLayout({
       />
       <h1 className="text-center text-xl">{profile.name}</h1>
       <h1 className="text-center text-zinc-500">@{profile.username}</h1>
-
-      <AnimatedButton size="small">Follow</AnimatedButton>
+      <div className="flex justify-center">
+        <FollowButton fetchTime={1000} />
+      </div>
       <ProfileNavbar username={params.username} />
       {children}
     </div>

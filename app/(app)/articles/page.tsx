@@ -1,13 +1,13 @@
 export const revalidate = 60;
 
 import { exists } from "@xata.io/client";
-import { xata } from "xata/client";
+import { ApprendamosXataClient } from "xata/clients";
 import Article from "./Article";
 
 import { ArticleType } from "types/ArticleType";
 
 async function getArticles() {
-  const data = await xata.db.articles
+  const data = await ApprendamosXataClient.db.Article
     .filter(exists("author"))
     .sort("publication_date", "desc")
     .select([

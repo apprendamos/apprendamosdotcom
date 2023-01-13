@@ -1,12 +1,12 @@
 export const revalidate = 60;
 
-import { xata } from "xata/client";
+import { ApprendamosXataClient } from "xata/clients";
 
 import { ProfileType } from "types";
 import { Profile } from "app/components";
 
 async function getFollowers(username: string) {
-  const page = await xata.db.profile_rels
+  const page = await ApprendamosXataClient.db.FollowerFollowee
     .filter("followee.username", username)
     .sort("creation_date", "desc")
     .select(["follower.*", "creation_date"])

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { xata } from "xata/client";
+import { ApprendamosXataClient } from "xata/clients";
 import { getSession } from "next-auth/react";
 import { AuthUserType } from "types";
 
@@ -35,14 +35,14 @@ export default async function handler(
 
       const { name, username, bio, birthdate } = req.body as RegisterBody;
 
-      const created = await xata.db.profiles.create({
+      const created = await ApprendamosXataClient.db.Profile.create({
         name,
         username,
         bio: bio || undefined,
         birthdate: birthdate ? new Date(birthdate) : undefined,
       });
 
-      await xata.db.users.update(user.id, {
+      await ApprendamosXataClient.db.User.update(user.id, {
         profile: created.id,
       });
 

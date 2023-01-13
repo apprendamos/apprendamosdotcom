@@ -2,7 +2,7 @@ export const revalidate = 60;
 
 import { notFound } from "next/navigation";
 import { ProfileType } from "types";
-import { xata } from "xata/client";
+import { ApprendamosXataClient } from "xata/clients";
 import {
   MarkdownArticle,
   Profile,
@@ -10,12 +10,12 @@ import {
 } from "app/components";
 
 async function getArticle(id: string) {
-  const record = await xata.db.articles.read(id);
+  const record = await ApprendamosXataClient.db.Article.read(id);
   return record;
 }
 
 async function getProfile(id: string) {
-  const record = await xata.db.profiles.read(id);
+  const record = await ApprendamosXataClient.db.Profile.read(id);
   return record;
 }
 
