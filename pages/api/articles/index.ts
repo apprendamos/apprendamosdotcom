@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { ApprendamosXataClient } from "xata/clients";
+import { AppXataClient } from "xata/clients";
 import { exists } from "@xata.io/client";
 
 import { getSession } from "next-auth/react";
@@ -22,7 +22,7 @@ export default async function handler(
 
       const profile = (session.user as AuthUserType).profile;
 
-      const created = await ApprendamosXataClient.db.Article.create({
+      const created = await AppXataClient.db.Article.create({
         body: req.body.body,
         author: profile?.id,
         publication_date: new Date(),
@@ -33,7 +33,7 @@ export default async function handler(
     case "GET":
       const { cursor } = req.query;
 
-      const page = await ApprendamosXataClient.db.Article
+      const page = await AppXataClient.db.Article
         .filter(exists("author"))
         .sort("publication_date", "desc")
         .select([

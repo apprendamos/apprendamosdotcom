@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { ApprendamosXataClient } from "xata/clients";
+import { AppXataClient } from "xata/clients";
 
 import { getSession } from "next-auth/react";
 import { AuthUserType } from "types";
@@ -25,7 +25,7 @@ export default async function handler(
 
             const { username } = req.query;
 
-            const profile = await ApprendamosXataClient.db.Profile
+            const profile = await AppXataClient.db.Profile
                 .filter("username", username as string)
                 .getFirst();
 
@@ -54,13 +54,13 @@ export default async function handler(
                 article_count: profile.article_count,
             };
 
-            const rel_0 = await ApprendamosXataClient.db.FollowerFollowee
+            const rel_0 = await AppXataClient.db.FollowerFollowee
                 .filter("follower", profile.id)
                 .filter("followee", profile_session.id)
                 .select(["*"])
                 .getFirst();
 
-            const rel_1 = await ApprendamosXataClient.db.FollowerFollowee
+            const rel_1 = await AppXataClient.db.FollowerFollowee
                 .filter("follower", profile_session.id)
                 .filter("followee", profile.id)
                 .select(["*"])
@@ -72,11 +72,11 @@ export default async function handler(
             };
 
             if (rel_1) {
-                const new_rel_1 = await ApprendamosXataClient.db.FollowerFollowee.update(rel_1.id, {
+                const new_rel_1 = await AppXataClient.db.FollowerFollowee.update(rel_1.id, {
                     following_status: !rel_1.following_status,
                 });
             } else {
-                const new_rel_1 = await ApprendamosXataClient.db.FollowerFollowee.create({
+                const new_rel_1 = await AppXataClient.db.FollowerFollowee.create({
                     follower: profile_session.id,
                     followee: profile.id,
                     following_status: true,

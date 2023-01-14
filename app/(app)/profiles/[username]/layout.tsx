@@ -2,14 +2,14 @@ export const revalidate = 60;
 
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ApprendamosXataClient } from "xata/clients";
+import { AppXataClient } from "xata/clients";
 
 import { randomIntFromInterval } from "utils";
 import ProfileNavbar from "./ProfileNavbar";
 import { AnimatedButton, FollowButton } from "app/components";
 
 async function getProfile(username: string) {
-  const record = await ApprendamosXataClient.db.Profile.filter("username", username).getFirst();
+  const record = await AppXataClient.db.Profile.filter("username", username).getFirst();
   return record;
 }
 

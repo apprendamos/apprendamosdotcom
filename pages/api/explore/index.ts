@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { ApprendamosXataClient } from "xata/clients";
+import { AppXataClient } from "xata/clients";
 
 type Data = any;
 
@@ -11,7 +11,7 @@ export default async function handler(
     case "GET":
       const queryString = req.query.q as string;
 
-      let records = await ApprendamosXataClient.search.byTable(queryString, {
+      let records = await AppXataClient.search.byTable(queryString, {
         tables: [
           {
             table: "Article",

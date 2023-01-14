@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { ApprendamosXataClient } from "xata/clients";
+import { AppXataClient } from "xata/clients";
 
 import { getSession } from "next-auth/react";
 import { AuthUserType } from "types";
@@ -15,7 +15,7 @@ export default async function handler(
     case "GET":
       const { username } = req.query;
 
-      const profile = await ApprendamosXataClient.db.Profile
+      const profile = await AppXataClient.db.Profile
         .filter("username", username as string)
         .getFirst();
 
@@ -46,13 +46,13 @@ export default async function handler(
         return;
       }
 
-      const rel_0 = await ApprendamosXataClient.db.FollowerFollowee
+      const rel_0 = await AppXataClient.db.FollowerFollowee
         .filter("follower", profile.id)
         .filter("followee", profile_session.id)
         .select(["*"])
         .getFirst();
 
-      const rel_1 = await ApprendamosXataClient.db.FollowerFollowee
+      const rel_1 = await AppXataClient.db.FollowerFollowee
         .filter("follower", profile_session.id)
         .filter("followee", profile.id)
         .select(["*"])

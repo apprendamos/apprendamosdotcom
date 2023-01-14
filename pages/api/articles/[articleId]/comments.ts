@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { ApprendamosXataClient } from "xata/clients";
+import { AppXataClient } from "xata/clients";
 import { exists } from "@xata.io/client";
 
 
@@ -14,14 +14,14 @@ export default async function handler(
     case "GET":
       const { articleId, cursor } = req.query;
 
-      const parent_article = await ApprendamosXataClient.db.Article.read(articleId as string);
+      const parent_article = await AppXataClient.db.Article.read(articleId as string);
 
       if (!parent_article) {
         res.status(404);
         return;
       }
 
-      const page = await ApprendamosXataClient.db.Comment
+      const page = await AppXataClient.db.Comment
         .filter(exists("author"))
         .filter("article", articleId as string)
         .sort("publication_date", "desc")

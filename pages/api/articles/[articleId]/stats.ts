@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { ApprendamosXataClient } from "xata/clients";
+import { AppXataClient } from "xata/clients";
 
 import { getSession } from "next-auth/react";
 import { AuthUserType } from "types";
@@ -15,7 +15,7 @@ export default async function handler(
     case "GET":
       const { articleId } = req.query;
 
-      const article = await ApprendamosXataClient.db.Article.read(articleId as string);
+      const article = await AppXataClient.db.Article.read(articleId as string);
 
       if (!article) {
         res.status(404);
@@ -44,7 +44,7 @@ export default async function handler(
         return;
       }
 
-      const actual_rel = await ApprendamosXataClient.db.ProfileArticle
+      const actual_rel = await AppXataClient.db.ProfileArticle
         .filter("article", articleId as string)
         .filter("profile", profile?.id)
         .select(["*"])

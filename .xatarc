@@ -1,6 +1,6 @@
 {
-  "databaseURL": "https://Apprendamos-Workspace-iae285.us-east-1.xata.sh/db/Payments",
+  "databaseURL": "https://Apprendamos-Workspace-iae285.us-east-1.xata.sh/db/apprendamos-authentication",
   "codegen": {
-    "output": "xata/dbs/payments.ts"
+    "output": "xata/dbs/authentication.ts"
   }
 }

@@ -1,5 +1,7 @@
-import { XataClient } from "xata/dbs/apprendamos";
-import { XataClient as XataClient2 } from "xata/dbs/payments";
+import { XataClient as AppClient } from "xata/dbs/app";
+import { XataClient as PaymentsClient } from "xata/dbs/payments";
+import { XataClient as AuthenticationClient } from "xata/dbs/authentication";
 
-export const ApprendamosXataClient = new XataClient();
-export const PaymentsXataClient = new XataClient2();
+export const AppXataClient = new AppClient();
+export const PaymentsXataClient = new PaymentsClient();
+export const AuthenticationXataClient = new AuthenticationClient();

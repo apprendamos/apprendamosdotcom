@@ -1,17 +1,17 @@
 export const revalidate = 60;
 
-import { ApprendamosXataClient } from "xata/clients";
+import { AppXataClient } from "xata/clients";
 
 import { ProfileType, ArticleType } from "types";
 import { ArticleCardSmall } from "app/components";
 
 async function getProfile(username: string) {
-  const records = await ApprendamosXataClient.db.Profile.filter("username", username).getAll();
+  const records = await AppXataClient.db.Profile.filter("username", username).getAll();
   return records[0];
 }
 
 async function getArticles(username: string) {
-  const data = await ApprendamosXataClient.db.Article
+  const data = await AppXataClient.db.Article
     .filter("author.username", username)
     .sort("publication_date", "desc")
     .select(["id", "body", "publication_date"])

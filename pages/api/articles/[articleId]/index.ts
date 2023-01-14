@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { ApprendamosXataClient } from "xata/clients";
+import { AppXataClient } from "xata/clients";
 
 import { getSession } from "next-auth/react";
 import { AuthUserType } from "types";
@@ -21,7 +21,7 @@ export default async function handler(
 
       const profile = (session.user as AuthUserType).profile;
 
-      const created = await ApprendamosXataClient.db.Article.create({
+      const created = await AppXataClient.db.Article.create({
         body: req.body.body,
         author: profile?.id,
         publication_date: new Date(),
@@ -32,7 +32,7 @@ export default async function handler(
     case "GET":
       const { articleId } = req.query;
 
-      const data = await ApprendamosXataClient.db.Article.read(articleId as string);
+      const data = await AppXataClient.db.Article.read(articleId as string);
 
       if (!data) {
         res.status(404).json({ error: "Article not found" });

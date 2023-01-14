@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { ApprendamosXataClient } from "xata/clients";
+import { AppXataClient } from "xata/clients";
 
 import { getSession } from "next-auth/react";
 import { AuthUserType } from "types";
@@ -27,14 +27,14 @@ export default async function handler(
         return;
       }
 
-      const article = await ApprendamosXataClient.db.Article.read(articleId as string);
+      const article = await AppXataClient.db.Article.read(articleId as string);
 
       if (!article) {
         res.status(404);
         return;
       }
 
-      const actual_rel = await ApprendamosXataClient.db.ProfileArticle
+      const actual_rel = await AppXataClient.db.ProfileArticle
         .filter("article", articleId as string)
         .filter("profile", profile?.id)
         .select(["*"])
@@ -43,7 +43,7 @@ export default async function handler(
       let updated_rel, updated_article;
 
       if (actual_rel) {
-        updated_rel = await ApprendamosXataClient.db.ProfileArticle.update(actual_rel.id, {
+        updated_rel = await AppXataClient.db.ProfileArticle.update(actual_rel.id, {
           like_status: !actual_rel.like_status,
         });
 
@@ -51,7 +51,7 @@ export default async function handler(
           like_count: article.like_count + (!actual_rel.like_status ? 1 : -1),
         });
       } else {
-        updated_rel = await ApprendamosXataClient.db.ProfileArticle.create({
+        updated_rel = await AppXataClient.db.ProfileArticle.create({
           article: articleId as string,
           profile: profile?.id,
           like_status: true,
